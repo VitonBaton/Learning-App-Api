@@ -1,15 +1,16 @@
+﻿using LearningApp.LoggerService;
+using LearningApp.Repositories;
 using LearningApp.Services;
 using LearningApp.Web.Extensions;
-using LearningApp.Web.Profiles;
 using Microsoft.OpenApi.Models;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.ConfigureCors();
-builder.Services.ConfigureLoggerService();
-builder.Services.ConfigurePostgreSqlContext(builder.Configuration);
-builder.Services.ConfigureRepositories();
+builder.Services.AddLogger();
+builder.AddApiServices();
+builder.Services.AddRepositories();
 builder.Services.AddBLLServices();
 
 //builder.Services.AddAutoMapper(typeof(ChaptersProfile), typeof(LecturesProfile));

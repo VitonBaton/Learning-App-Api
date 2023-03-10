@@ -23,25 +23,10 @@ public static class ServiceExtensions
         });
     }
 
-    public static void ConfigureLoggerService(this IServiceCollection services)
+    public static void AddApiServices(this WebApplicationBuilder builder)
     {
-        services.AddTransient<ILoggerManager, LoggerManager>();
+        var connectionString = builder.Configuration.GetConnectionString("PostgreSQL");
+        builder.Services
+            .AddPostgreSqlDbContext(o => o.UseNpgsql(connectionString));
     }
-
-    public static void ConfigurePostgreSqlContext(this IServiceCollection services, IConfiguration config)
-    {
-        var connectionString = config.GetConnectionString("PostgreSQL");
-        services.AddDbContext<LearningContext>(o => o.UseNpgsql(connectionString));
-    }
-    
-    public static void ConfigureRepositories(this IServiceCollection services)
-    {
-        services.AddTransient<IRepositoryWrapper, RepositoryWrapper>();
-    }
-
-    //public static void ConfigureServices(this IServiceCollection services)
-    //{
-    //    services.AddTransient<IChaptersService, ChaptersService>();
-    //    services.AddTransient<ILecturesService, LecturesService>();
-    //}
 }
