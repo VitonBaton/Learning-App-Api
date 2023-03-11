@@ -1,5 +1,6 @@
 ﻿using LearningApp.Contracts.Repositories;
 using LearningApp.Entities;
+using LearningApp.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,15 +17,30 @@ public static class RepositoriesServicesExtension
         services.AddScoped<ILectureTestQuestionsRepository, LectureTestQuestionsRepository>();
         services.AddScoped<ILectureTestsRepository, LectureTestsRepository>();
 
-        services.AddTransient<IRepositoryWrapper, RepositoryWrapper>();
-
         return services;
     }
 
     public static IServiceCollection AddPostgreSqlDbContext(this IServiceCollection services,
         Action<DbContextOptionsBuilder> options)
     {
-        services.AddDbContextPool<LearningContext>(options);
+        services.AddDbContextPool<LearningDbContext>(options);
+        services.AddScoped<ILearningContext, LearningContext>();
+        services.AddDbSet<Chapter>();
+        services.AddDbSet<ChapterTest>();
+        services.AddDbSet<ChapterTestAnswer>();
+        services.AddDbSet<ChapterTestQuestion>();
+        services.AddDbSet<Lecture>();
+        services.AddDbSet<LectureTest>();
+        services.AddDbSet<LectureTestAnswer>();
+        services.AddDbSet<LectureTestQuestion>();
+
+        return services;
+    }
+
+    private static IServiceCollection AddDbSet<T>(this IServiceCollection services) where T : class
+    {
+        services.AddScoped(serviceProvider => serviceProvider.GetRequiredService<LearningDbContext>().Set<T>());
+
         return services;
     }
 }

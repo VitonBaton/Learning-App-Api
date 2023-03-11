@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace LearningApp.Entities.Migrations
 {
-    [DbContext(typeof(LearningContext))]
+    [DbContext(typeof(LearningDbContext))]
     partial class LearningContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -46,7 +46,7 @@ namespace LearningApp.Entities.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Chapters");
+                    b.ToTable("Chapters", (string)null);
                 });
 
             modelBuilder.Entity("LearningApp.Entities.Models.ChapterTest", b =>
@@ -75,7 +75,7 @@ namespace LearningApp.Entities.Migrations
 
                     b.HasIndex("ChapterId");
 
-                    b.ToTable("ChapterTests");
+                    b.ToTable("ChapterTests", (string)null);
                 });
 
             modelBuilder.Entity("LearningApp.Entities.Models.ChapterTestAnswer", b =>
@@ -100,7 +100,7 @@ namespace LearningApp.Entities.Migrations
 
                     b.HasIndex("ChapterTestQuestionId");
 
-                    b.ToTable("ChapterTestAnswers");
+                    b.ToTable("ChapterTestAnswers", (string)null);
                 });
 
             modelBuilder.Entity("LearningApp.Entities.Models.ChapterTestQuestion", b =>
@@ -128,7 +128,7 @@ namespace LearningApp.Entities.Migrations
 
                     b.HasIndex("ChapterTestId");
 
-                    b.ToTable("ChapterTestQuestions");
+                    b.ToTable("ChapterTestQuestions", (string)null);
                 });
 
             modelBuilder.Entity("LearningApp.Entities.Models.Lecture", b =>
@@ -160,7 +160,7 @@ namespace LearningApp.Entities.Migrations
 
                     b.HasIndex("ChapterId");
 
-                    b.ToTable("Lectures");
+                    b.ToTable("Lectures", (string)null);
                 });
 
             modelBuilder.Entity("LearningApp.Entities.Models.LectureTest", b =>
@@ -189,7 +189,7 @@ namespace LearningApp.Entities.Migrations
 
                     b.HasIndex("LectureId");
 
-                    b.ToTable("LectureTests");
+                    b.ToTable("LectureTests", (string)null);
                 });
 
             modelBuilder.Entity("LearningApp.Entities.Models.LectureTestAnswer", b =>
@@ -214,7 +214,7 @@ namespace LearningApp.Entities.Migrations
 
                     b.HasIndex("LectureTestQuestionId");
 
-                    b.ToTable("LectureTestAnswers");
+                    b.ToTable("LectureTestAnswers", (string)null);
                 });
 
             modelBuilder.Entity("LearningApp.Entities.Models.LectureTestQuestion", b =>
@@ -242,7 +242,7 @@ namespace LearningApp.Entities.Migrations
 
                     b.HasIndex("LectureTestId");
 
-                    b.ToTable("LectureTestQuestions");
+                    b.ToTable("LectureTestQuestions", (string)null);
                 });
 
             modelBuilder.Entity("LearningApp.Entities.Models.ChapterTest", b =>

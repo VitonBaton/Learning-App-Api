@@ -7,8 +7,8 @@ namespace LearningApp.Repositories;
 
 public sealed class ChapterTestsRepository : RepositoryBase<ChapterTest>, IChapterTestsRepository
 {
-    public ChapterTestsRepository(LearningContext learningContext)
-        :base(learningContext)
+    public ChapterTestsRepository(DbSet<ChapterTest> entities)
+        :base(entities)
     {
         
     }

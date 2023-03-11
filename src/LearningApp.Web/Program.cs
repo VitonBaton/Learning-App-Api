@@ -1,39 +1,20 @@
-﻿using LearningApp.LoggerService;
-using LearningApp.Repositories;
-using LearningApp.Services;
-using LearningApp.Web.Extensions;
-using Microsoft.OpenApi.Models;
+﻿using LearningApp.Web.Extensions;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.ConfigureCors();
-builder.Services.AddLogger();
-builder.AddApiServices();
-builder.Services.AddRepositories();
-builder.Services.AddBLLServices();
-
-//builder.Services.AddAutoMapper(typeof(ChaptersProfile), typeof(LecturesProfile));
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-
-builder.Services.AddSwaggerGen(options =>
-{
-    options.SwaggerDoc("v1", new OpenApiInfo {Title = "LearningApp", Version = "v1"});
-});
 
 builder.Host.UseSerilog((context, config) =>
 {
     config.ReadFrom.Configuration(context.Configuration);
 });
 
-var app = builder.Build();
-if (app.Environment.IsDevelopment())
+builder.Host.UseDefaultServiceProvider(options =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-app.UseCors("CorsPolicy");
+    options.ValidateOnBuild = true;
+    options.ValidateScopes = true;
+});
 
-app.MapControllers();
-app.Run();
+builder.AddApiServices();
+var app = builder.Build();
+app.UseApiMiddleware();
+await app.RunAsync();

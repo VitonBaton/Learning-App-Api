@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace LearningApp.Entities.Migrations
 {
-    [DbContext(typeof(LearningContext))]
+    [DbContext(typeof(LearningDbContext))]
     [Migration("20221212185151_Initial")]
     partial class Initial
     {
