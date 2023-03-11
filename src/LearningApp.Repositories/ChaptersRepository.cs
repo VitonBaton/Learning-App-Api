@@ -7,8 +7,8 @@ namespace LearningApp.Repositories;
 
 public sealed class ChaptersRepository : RepositoryBase<Chapter>, IChaptersRepository 
 {
-    public ChaptersRepository(LearningContext learningContext)
-        :base(learningContext)
+    public ChaptersRepository(DbSet<Chapter> entities)
+        :base(entities)
     {
         
     }
@@ -29,20 +29,5 @@ public sealed class ChaptersRepository : RepositoryBase<Chapter>, IChaptersRepos
     public Task<Chapter?> GetChapterWithLectures(int id)
     {
         return FindByCondition(chapter => chapter.Id.Equals(id)).FirstOrDefaultAsync();
-    }
-
-    public Task CreateChapter(Chapter chapter)
-    {
-        return Create(chapter);
-    }
-
-    public void UpdateChapter(Chapter chapter)
-    {
-        Update(chapter);
-    }
-
-    public void DeleteChapter(Chapter chapter)
-    {
-        Delete(chapter);
     }
 }

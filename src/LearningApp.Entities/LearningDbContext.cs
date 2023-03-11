@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LearningApp.Entities;
 
-public class LearningContext : DbContext
+public class LearningDbContext : DbContext
 {
     public DbSet<Chapter>? Chapters { get; set; }
     public DbSet<ChapterTest>? ChapterTests { get; set; }
@@ -15,7 +15,7 @@ public class LearningContext : DbContext
     public DbSet<LectureTestQuestion>? LectureTestQuestions { get; set; }
     
     
-    public LearningContext(DbContextOptions<LearningContext> options)
+    public LearningDbContext(DbContextOptions<LearningDbContext> options)
         : base(options)
     {
     }

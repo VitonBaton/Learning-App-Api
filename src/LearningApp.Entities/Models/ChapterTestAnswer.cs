@@ -2,7 +2,7 @@
 
 namespace LearningApp.Entities.Models;
 
-public sealed record ChapterTestAnswer
+public sealed record ChapterTestAnswer : BaseEntity
 {
     public int Id { get; set; }
 
@@ -11,9 +11,6 @@ public sealed record ChapterTestAnswer
 
     [Required]
     public string Answer { get; set; } = null!;
-
-    [Required]
-    public DateTime CreatedAt { get; set; }
 
     public ChapterTestQuestion? ChapterTestQuestion { get; set; }
 }

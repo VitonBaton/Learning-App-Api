@@ -8,19 +8,33 @@ namespace LearningApp.Repositories;
 
 public abstract class RepositoryBase<T> : IRepositoryBase<T> where T: class
 {
-    protected LearningContext LearningContext { get; set; }
-    public RepositoryBase(LearningContext learningContext)
+    protected readonly DbSet<T> _entities;
+    public RepositoryBase(DbSet<T> entities)
     {
-        LearningContext = learningContext;
+        _entities = entities;
     }
-    public IQueryable<T> FindAll() => LearningContext.Set<T>().AsNoTracking();
-    public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression) => 
-        LearningContext.Set<T>().Where(expression).AsNoTracking();
+    public IQueryable<T> FindAll()
+    {
+        return _entities.AsNoTracking();
+    }
+
+    public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
+    {
+        return _entities.Where(expression).AsNoTracking();
+    }
+
     public async Task Create(T entity)
     {
-        await LearningContext.Set<T>().AddAsync(entity);
+        await _entities.AddAsync(entity);
     }
-    public void Update(T entity) => LearningContext.Set<T>().Update(entity);
-    public void Delete(T entity) => LearningContext.Set<T>().Remove(entity);
+    public void Update(T entity)
+    {
+        _entities.Update(entity);
+    }
+
+    public void Delete(T entity)
+    {
+        _entities.Remove(entity);
+    }
 }
 

@@ -6,15 +6,15 @@ namespace LearningApp.Services;
 
 public class LecturesService : ILecturesService
 {
-    private readonly IRepositoryWrapper _repository;
+    private readonly ILecturesRepository _lecturesRepository;
 
-    public LecturesService(IRepositoryWrapper repository)
+    public LecturesService(ILecturesRepository lecturesRepository)
     {
-        _repository = repository;
+        _lecturesRepository = lecturesRepository;
     }
     
     public Task<IEnumerable<Lecture>> GetLecturesByChapterAsync(int chapterId)
     {
-        return _repository.Lectures.GetLecturesByChapterAsync(chapterId);
+        return _lecturesRepository.GetLecturesByChapterAsync(chapterId);
     }
 }

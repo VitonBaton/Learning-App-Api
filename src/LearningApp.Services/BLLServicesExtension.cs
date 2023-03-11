@@ -1,4 +1,5 @@
-﻿using LearningApp.Contracts.Services;
+﻿using AutoMapper;
+using LearningApp.Contracts.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LearningApp.Services;
