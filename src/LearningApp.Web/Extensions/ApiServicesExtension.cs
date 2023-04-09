@@ -38,7 +38,7 @@ public static class ApiServicesExtension
             //.AddSingleton<ErrorHandlerMiddleware>()
             //.AddFailureHandlers();
 
-        //builder.AddSerilogLoggerProvider();
+        builder.AddSerilogLoggerProvider();
     }
 
     public static IServiceCollection AddSwaggerServices(this IServiceCollection services)
