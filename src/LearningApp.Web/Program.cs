@@ -1,12 +1,6 @@
 ﻿using LearningApp.Web.Extensions;
-using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Host.UseSerilog((context, config) =>
-{
-    config.ReadFrom.Configuration(context.Configuration);
-});
 
 builder.Host.UseDefaultServiceProvider(options =>
 {
