@@ -1,10 +1,12 @@
-﻿namespace LearningApp.Web.Extensions;
+﻿using LearningApp.Web.Middlewares;
+
+namespace LearningApp.Web.Extensions;
 
 public static class ApiMiddlewareExtension
 {
     public static WebApplication UseApiMiddleware(this WebApplication app)
     {
-        //app.UseMiddleware<ErrorHandlerMiddleware>();
+        app.UseMiddleware<ErrorHandlerMiddleware>();
 
         if (app.Environment.IsDevelopment())
         {
