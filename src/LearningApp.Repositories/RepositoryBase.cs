@@ -8,6 +8,7 @@ namespace LearningApp.Repositories;
 
 public abstract class RepositoryBase<T> : IRepositoryBase<T> where T: class
 {
+    // ReSharper disable once InconsistentNaming
     protected readonly DbSet<T> _entities;
     public RepositoryBase(DbSet<T> entities)
     {

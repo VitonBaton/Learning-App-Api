@@ -12,7 +12,9 @@ public static class ApiServicesExtension
 {
     public static void AddApiServices(this WebApplicationBuilder builder)
     {
-        builder.Services
+        builder
+            .AddSerilogLoggerProvider()
+            .Services
             .AddControllers()
             .AddJsonOptions(options =>
             {
@@ -24,21 +26,19 @@ public static class ApiServicesExtension
             .AddSwaggerGen()
             .AddRepositories()
             .AddPostgreSqlDbContext(o => o.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL")))
-            .AddBLLServices()
+            .AddBllServices()
             .AddLogger()
             .AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
-                    builder =>
-                        builder.AllowAnyOrigin()
+                    corsPolicyBuilder =>
+                        corsPolicyBuilder.AllowAnyOrigin()
                         .AllowAnyHeader()
                         .AllowAnyMethod());
             })
             .AddSwaggerServices();
             //.AddSingleton<ErrorHandlerMiddleware>()
             //.AddFailureHandlers();
-
-        builder.AddSerilogLoggerProvider();
     }
 
     public static IServiceCollection AddSwaggerServices(this IServiceCollection services)

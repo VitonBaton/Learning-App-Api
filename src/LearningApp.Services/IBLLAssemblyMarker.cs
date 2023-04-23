@@ -1,2 +1,2 @@
 ﻿namespace LearningApp.Services;
-internal interface IBLLAssemblyMarker { }
+internal interface IBllAssemblyMarker { }

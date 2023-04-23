@@ -4,16 +4,16 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace LearningApp.Services;
 
-public static class BLLServicesExtension
+public static class BllServicesExtension
 {
-    public static IServiceCollection AddBLLServices(this IServiceCollection services)
+    public static IServiceCollection AddBllServices(this IServiceCollection services)
     {
         //services.AddValidatorsFromAssembly(typeof(IApplicationAssemblyMarker).Assembly);
 
         services.AddScoped<IChaptersService, ChaptersService>();
         services.AddScoped<ILecturesService, LecturesService>();
 
-        services.AddAutoMapper(typeof(IBLLAssemblyMarker).Assembly);
+        services.AddAutoMapper(typeof(IBllAssemblyMarker).Assembly);
         return services;
     }
 }
