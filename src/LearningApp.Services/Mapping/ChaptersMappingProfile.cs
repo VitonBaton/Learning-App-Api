@@ -22,6 +22,6 @@ public class ChaptersMappingProfile : Profile
                 expression => expression.MapFrom(ltq =>
                     ltq.ChapterTestAnswers!.Select(lta => lta.Answer)));
 
-        CreateMap<ChapterForCreationDto, Chapter>();
+        CreateMap<ChapterCreateDto, Chapter>();
     }
 }

@@ -27,7 +27,7 @@ public class ChaptersService : IChaptersService
         _logger = logger;
         _mapper = mapper;
     }
-        
+
     public async Task<IEnumerable<ChapterDto>> GetAllChaptersAsync()
     {
         var chapters = await _chaptersRepository.GetAllChaptersAsync();
@@ -54,7 +54,7 @@ public class ChaptersService : IChaptersService
         return _mapper.Map<IEnumerable<ChapterTestWithQuestionsDto>>(result);
     }
 
-    public async Task<ChapterDto> CreateChapter(ChapterForCreationDto chapter)
+    public async Task<ChapterDto> CreateChapter(ChapterCreateDto chapter)
     {
         var createdEntity = _mapper.Map<Chapter>(chapter);
         createdEntity.CreatedAt = DateTime.UtcNow;
@@ -63,7 +63,7 @@ public class ChaptersService : IChaptersService
         return _mapper.Map<ChapterDto>(createdEntity);
     }
 
-    public async Task UpdateChapter(int id, ChapterForUpdateDto chapter)
+    public async Task UpdateChapter(int id, ChapterCreateDto chapter)
     {
         var chapterEntity = await _chaptersRepository.GetChapterWithLectures(id);
         if (chapterEntity is null)

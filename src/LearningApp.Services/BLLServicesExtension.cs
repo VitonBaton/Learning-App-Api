@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using LearningApp.Contracts.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,7 +10,8 @@ public static class BllServicesExtension
 {
     public static IServiceCollection AddBllServices(this IServiceCollection services)
     {
-        //services.AddValidatorsFromAssembly(typeof(IApplicationAssemblyMarker).Assembly);
+        services.AddFluentValidationAutoValidation();
+        services.AddValidatorsFromAssembly(typeof(IBllAssemblyMarker).Assembly);
 
         services.AddScoped<IChaptersService, ChaptersService>();
         services.AddScoped<ILecturesService, LecturesService>();

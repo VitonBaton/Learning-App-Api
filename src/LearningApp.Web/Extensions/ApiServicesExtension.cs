@@ -5,6 +5,7 @@ using LearningApp.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
+using LearningApp.Web.Middlewares;
 
 namespace LearningApp.Web.Extensions;
 
@@ -33,12 +34,12 @@ public static class ApiServicesExtension
                 options.AddPolicy("CorsPolicy",
                     corsPolicyBuilder =>
                         corsPolicyBuilder.AllowAnyOrigin()
-                        .AllowAnyHeader()
-                        .AllowAnyMethod());
+                            .AllowAnyHeader()
+                            .AllowAnyMethod());
             })
-            .AddSwaggerServices();
-            //.AddSingleton<ErrorHandlerMiddleware>()
-            //.AddFailureHandlers();
+            .AddSwaggerServices()
+            .AddSingleton<ErrorHandlerMiddleware>();
+        //.AddFailureHandlers();
     }
 
     public static IServiceCollection AddSwaggerServices(this IServiceCollection services)

@@ -24,7 +24,7 @@ public class ChaptersController : ControllerBase
         _mapper = mapper;
         _lecturesService = lecturesService;
     }
-    
+
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ChapterDto>>> GetAllChapters()
     {
@@ -39,7 +39,7 @@ public class ChaptersController : ControllerBase
             return StatusCode(500, "Internal server error");
         }
     }
-    
+
     [HttpGet("{id:int}/lectures")]
     public async Task<ActionResult<ChapterDto>> GetChapterWithLectures(int id)
     {
@@ -54,7 +54,7 @@ public class ChaptersController : ControllerBase
             return StatusCode(500, "Internal server error");
         }
     }
-    
+
     [HttpGet("{id:int}/tests")]
     public async Task<ActionResult<ChapterWithTestsDto>> GetChapterWithTests(int id)
     {
@@ -69,9 +69,9 @@ public class ChaptersController : ControllerBase
             return StatusCode(500, "Internal server error");
         }
     }
-    
+
     [HttpPost]
-    public async Task<IActionResult> CreateChapter([FromBody]ChapterForCreationDto chapter)
+    public async Task<ActionResult<ChapterDto>> CreateChapter([FromBody]ChapterCreateDto chapter)
     {
         try
         {
@@ -89,9 +89,9 @@ public class ChaptersController : ControllerBase
             return StatusCode(500, "Internal server error");
         }
     }
-    
+
     [HttpPut("{id:int}")]
-    public async Task<IActionResult> UpdateChapter(int id, [FromBody]ChapterForUpdateDto chapter)
+    public async Task<IActionResult> UpdateChapter(int id, [FromBody]ChapterCreateDto chapter)
     {
         try
         {
@@ -109,7 +109,7 @@ public class ChaptersController : ControllerBase
             return StatusCode(500, "Internal server error");
         }
     }
-    
+
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteChapter(int id)
     {
