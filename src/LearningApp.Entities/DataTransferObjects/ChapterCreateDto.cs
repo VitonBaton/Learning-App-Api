@@ -1,5 +1,5 @@
 ﻿namespace LearningApp.Entities.DataTransferObjects;
 
-public record ChapterForUpdateDto(string Title,
+public record ChapterCreateDto(string Title,
     string Description,
     int Order);
