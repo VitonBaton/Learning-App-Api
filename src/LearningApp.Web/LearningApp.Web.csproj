@@ -26,7 +26,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\LearningApp.LoggerService\LearningApp.LoggerService.csproj" />
-      <ProjectReference Include="..\LearningApp.Repositories\LearningApp.Repositories.csproj" />
+      <ProjectReference Include="..\LearningApp.DataAccess\LearningApp.DataAccess.csproj" />
       <ProjectReference Include="..\LearningApp.Services\LearningApp.Services.csproj" />
     </ItemGroup>
 

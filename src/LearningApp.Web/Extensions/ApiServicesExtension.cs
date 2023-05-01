@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using LearningApp.LoggerService;
-using LearningApp.Repositories;
+using LearningApp.DataAccess;
 using LearningApp.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
+using LearningApp.DataAccess.Repositories;
 using LearningApp.Web.Middlewares;
 
 namespace LearningApp.Web.Extensions;

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using LearningApp.Contracts.Services;
-using LearningApp.Entities.DataTransferObjects;
+using LearningApp.Models.DataTransferObjects;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LearningApp.Web.Controllers;

@@ -1,4 +1,4 @@
-﻿using LearningApp.Entities.Models;
+﻿using LearningApp.Models.Entities;
 
 namespace LearningApp.Contracts.Services;
 

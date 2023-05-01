@@ -1,6 +1,6 @@
 ﻿using LearningApp.Contracts.Repositories;
 using LearningApp.Contracts.Services;
-using LearningApp.Entities.Models;
+using LearningApp.Models.Entities;
 
 namespace LearningApp.Services;
 
@@ -12,7 +12,7 @@ public class LecturesService : ILecturesService
     {
         _lecturesRepository = lecturesRepository;
     }
-    
+
     public Task<IEnumerable<Lecture>> GetLecturesByChapterAsync(int chapterId)
     {
         return _lecturesRepository.GetLecturesByChapterAsync(chapterId);
