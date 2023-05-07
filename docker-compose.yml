@@ -1,0 +1,57 @@
+version: "3.9"
+services:
+
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "learning"
+      POSTGRES_USER: "test"
+      POSTGRES_PASSWORD: "12345678"
+    volumes:
+      - ./postgres:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    networks:
+     - app
+
+  pgadmin:
+    image: dpage/pgadmin4:5.7
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "vitonbaton@yandex.ru"
+      PGADMIN_DEFAULT_PASSWORD: "12345678"
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1G
+    networks:
+      - app
+    depends_on:
+      - postgres
+
+  learning:
+    build:
+      context: .
+      dockerfile: web.Dockerfile
+    ports:
+      - "9999:80"
+    environment:
+      ConnectionStrings__PostgreSQL: "Server=postgres,5432;Database=learning;Username=test;Password=12345678"
+      AuthSettings__Issuer: "issuer"
+      AuthSettings__Audience: "audience"
+      AuthSettings__SecurityKey: "looooooong-secret-key"
+      SeedsSettings__AdminPass: "1234"
+    networks:
+      - app
+    depends_on:
+      - postgres
+
+networks:
+  app:
+    driver: bridge

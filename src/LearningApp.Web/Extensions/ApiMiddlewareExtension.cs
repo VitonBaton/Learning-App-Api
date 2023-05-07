@@ -8,11 +8,8 @@ public static class ApiMiddlewareExtension
     {
         app.UseMiddleware<ErrorHandlerMiddleware>();
 
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI();
-        }
+        app.UseSwagger();
+        app.UseSwaggerUI();
 
         app.UseHsts();
         app.UseForwardedHeaders();

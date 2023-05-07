@@ -17,10 +17,10 @@ RUN dotnet restore "LearningApp.Web/LearningApp.Web.csproj"
 COPY . .
 WORKDIR "/src/LearningApp.Web"
 
-RUN dotnet build "LearningApp.Web.csproj" -o /app/build
+RUN dotnet build "LearningApp.Web.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "LearningApp.Web.csproj" -o /app/publish
+RUN dotnet publish "LearningApp.Web.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app

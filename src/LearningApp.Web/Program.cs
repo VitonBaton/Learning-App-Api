@@ -13,6 +13,7 @@ builder.Host.UseDefaultServiceProvider(options =>
 builder.AddApiServices();
 var app = builder.Build();
 
+await app.Services.MigrateDatabaseAsync<LearningDbContext>(app.Lifetime.ApplicationStopping);
 await app.Services.SeedEntitiesAsync<LearningDbContext>(app.Lifetime.ApplicationStopping);
 
 app.UseApiMiddleware();
