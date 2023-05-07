@@ -5,13 +5,13 @@ VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningApp.Web", "src\LearningApp.Web\LearningApp.Web.csproj", "{E7E789DD-3B11-4A19-AA9E-73BD80356801}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningApp.Entities", "src\LearningApp.Entities\LearningApp.Entities.csproj", "{4F94D33D-1829-46FD-9AB1-9340E5C1A1A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningApp.Models", "src\LearningApp.Models\LearningApp.Models.csproj", "{4F94D33D-1829-46FD-9AB1-9340E5C1A1A4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningApp.Contracts", "src\LearningApp.Contracts\LearningApp.Contracts.csproj", "{F31961A6-970C-4998-B905-714448011282}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningApp.LoggerService", "src\LearningApp.LoggerService\LearningApp.LoggerService.csproj", "{98A5FDE2-CB2E-4874-B14D-BC8C70361DED}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningApp.Repositories", "src\LearningApp.Repositories\LearningApp.Repositories.csproj", "{9046504D-C35E-41BF-9A59-3EF5DB078BD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningApp.DataAccess", "src\LearningApp.DataAccess\LearningApp.DataAccess.csproj", "{9046504D-C35E-41BF-9A59-3EF5DB078BD4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningApp.Services", "src\LearningApp.Services\LearningApp.Services.csproj", "{C788F5DC-8385-4C62-AD8E-E57D39703BCD}"
 EndProject

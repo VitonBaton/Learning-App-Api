@@ -2,8 +2,8 @@
 using LearningApp.Contracts.Repositories;
 using LearningApp.Contracts.Services;
 using LearningApp.Core.Exceptions;
-using LearningApp.Entities.DataTransferObjects;
-using LearningApp.Entities.Models;
+using LearningApp.Models.DataTransferObjects;
+using LearningApp.Models.Entities;
 
 namespace LearningApp.Services;
 

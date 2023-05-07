@@ -15,6 +15,7 @@ public static class BllServicesExtension
 
         services.AddScoped<IChaptersService, ChaptersService>();
         services.AddScoped<ILecturesService, LecturesService>();
+        services.AddScoped<IUsersService, UsersService>();
 
         services.AddAutoMapper(typeof(IBllAssemblyMarker).Assembly);
         return services;

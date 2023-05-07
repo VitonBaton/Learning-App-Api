@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using LearningApp.Entities.DataTransferObjects;
-using LearningApp.Entities.Models;
+using LearningApp.Models.DataTransferObjects;
+using LearningApp.Models.Entities;
 
 namespace LearningApp.Services.Mapping;
 

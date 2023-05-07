@@ -1,4 +1,4 @@
-﻿using LearningApp.Entities.DataTransferObjects;
+﻿using LearningApp.Models.DataTransferObjects;
 
 namespace LearningApp.Contracts.Services;
 

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using LearningApp.Contracts.Services;
-using LearningApp.Entities.DataTransferObjects;
+using LearningApp.Core.Classifiers;
+using LearningApp.Models.DataTransferObjects;
+using LearningApp.Services.Auth;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LearningApp.Web.Controllers;
@@ -26,6 +28,7 @@ public class ChaptersController : ControllerBase
     }
 
     [HttpGet]
+    [AuthorizeRoles(RoleType.Admin,RoleType.Student)]
     public async Task<ActionResult<IEnumerable<ChapterDto>>> GetAllChapters()
     {
         try
@@ -41,6 +44,7 @@ public class ChaptersController : ControllerBase
     }
 
     [HttpGet("{id:int}/lectures")]
+    [AuthorizeRoles(RoleType.Admin,RoleType.Student)]
     public async Task<ActionResult<ChapterDto>> GetChapterWithLectures(int id)
     {
         try
@@ -56,6 +60,7 @@ public class ChaptersController : ControllerBase
     }
 
     [HttpGet("{id:int}/tests")]
+    [AuthorizeRoles(RoleType.Admin,RoleType.Student)]
     public async Task<ActionResult<ChapterWithTestsDto>> GetChapterWithTests(int id)
     {
         try
@@ -71,6 +76,7 @@ public class ChaptersController : ControllerBase
     }
 
     [HttpPost]
+    [AuthorizeRoles(RoleType.Admin)]
     public async Task<ActionResult<ChapterDto>> CreateChapter([FromBody]ChapterCreateDto chapter)
     {
         try
@@ -91,6 +97,7 @@ public class ChaptersController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
+    [AuthorizeRoles(RoleType.Admin)]
     public async Task<IActionResult> UpdateChapter(int id, [FromBody]ChapterCreateDto chapter)
     {
         try
@@ -111,6 +118,7 @@ public class ChaptersController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [AuthorizeRoles(RoleType.Admin)]
     public async Task<IActionResult> DeleteChapter(int id)
     {
         try
