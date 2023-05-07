@@ -2,7 +2,7 @@
 
 namespace LearningApp.Models.Entities;
 
-public sealed record LectureTest : BaseEntity
+public sealed class LectureTest : BaseEntity
 {
     public int Id { get; set; }
 

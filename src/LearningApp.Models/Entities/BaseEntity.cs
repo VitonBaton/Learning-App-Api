@@ -2,7 +2,7 @@
 
 namespace LearningApp.Models.Entities;
 
-public record BaseEntity
+public class BaseEntity
 {
     [Required]
     public DateTime CreatedAt { get; set; }

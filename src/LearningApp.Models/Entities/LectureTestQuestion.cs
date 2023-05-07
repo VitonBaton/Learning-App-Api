@@ -2,7 +2,7 @@
 
 namespace LearningApp.Models.Entities;
 
-public sealed record LectureTestQuestion : BaseEntity
+public sealed class LectureTestQuestion : BaseEntity
 {
     public int Id { get; set; }
 
@@ -11,7 +11,7 @@ public sealed record LectureTestQuestion : BaseEntity
 
     [Required]
     public string Question { get; set; } = null!;
-    
+
     [Required]
     public int Order { get; set; }
 

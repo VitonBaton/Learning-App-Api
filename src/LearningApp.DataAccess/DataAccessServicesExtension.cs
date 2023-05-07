@@ -1,12 +1,13 @@
 ﻿using LearningApp.Contracts.Repositories;
+using LearningApp.DataAccess.Repositories;
 using LearningApp.Models;
 using LearningApp.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LearningApp.DataAccess.Repositories;
+namespace LearningApp.DataAccess;
 
-public static class RepositoriesServicesExtension
+public static class DataAccessServicesExtension
 {
     public static IServiceCollection AddRepositories(this IServiceCollection services)
     {
@@ -33,6 +34,8 @@ public static class RepositoriesServicesExtension
         services.AddDbSet<LectureTest>();
         services.AddDbSet<LectureTestAnswer>();
         services.AddDbSet<LectureTestQuestion>();
+        services.AddDbSet<ChapterTestResult>();
+        services.AddDbSet<LectureTestResult>();
 
         return services;
     }

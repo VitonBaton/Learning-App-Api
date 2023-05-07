@@ -1,7 +1,10 @@
 ﻿namespace LearningApp.Models.DataTransferObjects;
 
-public record ChapterTestQuestionDto(int Id,
-    string Question,
-    int Order,
-    DateTime CreatedAt,
-    IEnumerable<string>? Answers);
+public sealed class ChapterTestQuestionDto
+{
+    public int Id { get; set; }
+    public string Question { get; set; }
+    public int Order { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public IEnumerable<string> Answers { get; set; }
+}
