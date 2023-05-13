@@ -19,4 +19,6 @@ public interface IUsersService
     public Task DeleteAsync(int id);
 
     Task AddPhotoToUser(int userId, IFormFile image);
+
+    Task UpdatePasswordAsync(int userId, PasswordUpdateDto passwordModel);
 }

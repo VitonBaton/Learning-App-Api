@@ -177,4 +177,20 @@ public class UsersService : IUsersService
             throw new AppException(result.Errors.First().Description);
         }
     }
+
+    public async Task UpdatePasswordAsync(int userId, PasswordUpdateDto passwordModel)
+    {
+        var user = await _userManager.FindByIdAsync(userId.ToString());
+        if (user is null)
+        {
+            throw new NotFoundAppException("User not found");
+        }
+
+        var result =
+            await _userManager.ChangePasswordAsync(user, passwordModel.CurrentPassword, passwordModel.NewPassword);
+        if (!result.Succeeded)
+        {
+            throw new InvalidDataAppException(result.Errors.First().Description);
+        }
+    }
 }
