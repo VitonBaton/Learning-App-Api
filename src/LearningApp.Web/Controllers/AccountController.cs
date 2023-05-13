@@ -54,8 +54,6 @@ public class AccountController : ControllerBase
         return Ok("Image successfully uploaded");
     }
 
-
-
     [HttpPost]
     [AuthorizeRoles(RoleType.Admin)]
     [Route("users")]
@@ -126,6 +124,15 @@ public class AccountController : ControllerBase
             await _usersService.UpdateAsync(userModel);
         }
 
+        return Ok();
+    }
+
+    [HttpPatch]
+    [Route("users/current/password")]
+    [AuthorizeRoles(RoleType.Admin, RoleType.Student)]
+    public async Task<ActionResult> UpdateUserPassword([FromBody] PasswordUpdateDto passwordModel)
+    {
+        await _usersService.UpdatePasswordAsync(_authenticatedUser.UserId, passwordModel);
         return Ok();
     }
 }
