@@ -1,8 +1,9 @@
-﻿using LearningApp.DataAccess;
-using LearningApp.Web.DatabaseSeeds;
+﻿using LearningApp.Core.Helpers;
+using LearningApp.DataAccess;
 using LearningApp.Web.Extensions;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder =
+    WebApplication.CreateBuilder(new WebApplicationOptions { WebRootPath = FilesHelper.BasePath, Args = args });
 
 builder.Host.UseDefaultServiceProvider(options =>
 {

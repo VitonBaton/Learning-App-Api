@@ -17,4 +17,5 @@ public sealed class ChapterTest : BaseEntity
 
     public Chapter? Chapter { get; set; }
     public IEnumerable<ChapterTestQuestion>? ChapterTestQuestions { get; set; }
+    public IEnumerable<ChapterTestResult>? ChapterTestResults { get; set; }
 }

@@ -17,4 +17,5 @@ public sealed class LectureTest : BaseEntity
 
     public Lecture? Lecture { get; set; }
     public IEnumerable<LectureTestQuestion>? LectureTestQuestions { get; set; }
+    public IEnumerable<LectureTestResult>? LectureTestResults { get; set; }
 }

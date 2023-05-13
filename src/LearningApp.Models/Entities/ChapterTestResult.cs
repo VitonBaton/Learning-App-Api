@@ -23,5 +23,8 @@ public sealed class ChapterTestResult : BaseEntity
     [Required]
     public int QuestionsCount { get; set; }
 
+    [Required]
+    public int CompletionTimeInSeconds { get; set; }
+
     public User? User { get; set; }
 }

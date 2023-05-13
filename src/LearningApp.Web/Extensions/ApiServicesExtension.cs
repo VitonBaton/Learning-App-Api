@@ -1,18 +1,16 @@
-﻿using AutoMapper;
-using LearningApp.LoggerService;
+﻿using System.Text.Json.Serialization;
 using LearningApp.DataAccess;
-using LearningApp.Services;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
-using System.Text.Json.Serialization;
-using LearningApp.DataAccess.Repositories;
+using LearningApp.LoggerService;
 using LearningApp.Models.Auth;
-using LearningApp.Models.Entities;
+using LearningApp.Services;
 using LearningApp.Services.Auth;
 using LearningApp.Web.DatabaseSeeds;
+using LearningApp.Web.HttpContexts;
 using LearningApp.Web.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Net.Http.Headers;
+using Microsoft.OpenApi.Models;
 
 namespace LearningApp.Web.Extensions;
 
@@ -32,11 +30,7 @@ public static class ApiServicesExtension
             .AddSerilogLoggerProvider()
             .Services
             .AddControllers()
-            .AddJsonOptions(options =>
-            {
-                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-
-            })
+            .AddJsonOptions(options => { options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); })
             .Services
             .AddEndpointsApiExplorer()
             .AddSwaggerGen()
@@ -58,7 +52,8 @@ public static class ApiServicesExtension
                             .AllowAnyMethod());
             })
             .AddSwaggerServices()
-            .AddSingleton<ErrorHandlerMiddleware>();
+            .AddSingleton<ErrorHandlerMiddleware>()
+            .AddHttpContexts();
         //.AddFailureHandlers();
     }
 
@@ -66,20 +61,17 @@ public static class ApiServicesExtension
     {
         services.AddSwaggerGen(setup =>
         {
-            setup.SwaggerDoc("v1", new OpenApiInfo
-            {
-                Title = "LearningApp",
-                Version = "v1",
-                Description = "Documentation of API"
-            });
+            setup.SwaggerDoc("v1",
+                new OpenApiInfo { Title = "LearningApp", Version = "v1", Description = "Documentation of API" });
 
-            setup.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
-            {
-                In = ParameterLocation.Header,
-                Description = "Please, insert JWT. For example: Bearer ABC123...",
-                Name = HeaderNames.Authorization,
-                Type = SecuritySchemeType.ApiKey
-            });
+            setup.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme,
+                new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please, insert JWT. For example: Bearer ABC123...",
+                    Name = HeaderNames.Authorization,
+                    Type = SecuritySchemeType.ApiKey
+                });
 
             setup.AddSecurityRequirement(new OpenApiSecurityRequirement
             {
@@ -88,8 +80,7 @@ public static class ApiServicesExtension
                     {
                         Reference = new OpenApiReference
                         {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = JwtBearerDefaults.AuthenticationScheme
+                            Type = ReferenceType.SecurityScheme, Id = JwtBearerDefaults.AuthenticationScheme
                         }
                     },
                     Array.Empty<string>()

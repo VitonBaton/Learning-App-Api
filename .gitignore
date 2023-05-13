@@ -398,3 +398,5 @@ FodyWeavers.xsd
 *.sln.iml
 /docker/volumes/postgres/data
 .idea/
+
+src/LearningApp.Web/Images/

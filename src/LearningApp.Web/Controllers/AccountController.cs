@@ -1,42 +1,28 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+﻿using LearningApp.Contracts;
 using LearningApp.Contracts.Services;
 using LearningApp.Core.Classifiers;
-using LearningApp.Core.Exceptions;
 using LearningApp.Models.Auth;
 using LearningApp.Models.DataTransferObjects;
-using LearningApp.Models.Entities;
 using LearningApp.Services.Auth;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.Net.Http.Headers;
 
 namespace LearningApp.Web.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AccountController: ControllerBase
+public class AccountController : ControllerBase
 {
-    private readonly IUsersService _usersService;
+    private readonly IAuthenticatedUser _authenticatedUser;
     private readonly AuthSettings _authSettings;
-    private int UserId => int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+    private readonly IUsersService _usersService;
 
-    private RoleType UserRole
-    {
-        get
-        {
-            Enum.TryParse(User.FindFirstValue(ClaimTypes.Role), out RoleType userRole);
-            return userRole;
-        }
-    }
-
-    public AccountController(IOptions<AuthSettings> options, IUsersService usersService)
+    public AccountController(IOptions<AuthSettings> options, IUsersService usersService,
+        IAuthenticatedUser authenticatedUser)
     {
         _usersService = usersService;
+        _authenticatedUser = authenticatedUser;
         _authSettings = options.Value ?? throw new Exception("AuthSettings is null");
     }
 
@@ -60,6 +46,17 @@ public class AccountController: ControllerBase
     }
 
     [HttpPost]
+    [AuthorizeRoles(RoleType.Admin, RoleType.Student)]
+    [Route("users/current/photo")]
+    public async Task<IActionResult> UploadPhotoAsync(IFormFile image)
+    {
+        await _usersService.AddPhotoToUser(_authenticatedUser.UserId, image);
+        return Ok("Image successfully uploaded");
+    }
+
+
+
+    [HttpPost]
     [AuthorizeRoles(RoleType.Admin)]
     [Route("users")]
     public async Task<ActionResult<UserDto>> AddUserAsync([FromBody] UserRegistrationDto userModel)
@@ -78,11 +75,11 @@ public class AccountController: ControllerBase
     }
 
     [HttpGet]
-    [AuthorizeRoles(RoleType.Admin,RoleType.Student)]
+    [AuthorizeRoles(RoleType.Admin, RoleType.Student)]
     [Route("users/current")]
     public async Task<ActionResult<IEnumerable<UserDto>>> GetCurrentAsync()
     {
-        var user = await _usersService.GetSingleAsync(UserId);
+        var user = await _usersService.GetSingleAsync(_authenticatedUser.UserId);
         return Ok(user);
     }
 
@@ -96,11 +93,11 @@ public class AccountController: ControllerBase
     }
 
     [HttpDelete]
-    [AuthorizeRoles(RoleType.Admin,RoleType.Student)]
+    [AuthorizeRoles(RoleType.Admin, RoleType.Student)]
     [Route("users/current")]
     public async Task<ActionResult> DeleteAccount()
     {
-        await _usersService.DeleteAsync(UserId);
+        await _usersService.DeleteAsync(_authenticatedUser.UserId);
         return Ok();
     }
 
@@ -118,13 +115,13 @@ public class AccountController: ControllerBase
     [AuthorizeRoles(RoleType.Admin, RoleType.Student)]
     public async Task<ActionResult> UpdateAccount([FromBody] UserDto userModel)
     {
-        if (UserRole == RoleType.Admin)
+        if (_authenticatedUser.Role == RoleType.Admin)
         {
             await _usersService.UpdateAsync(userModel);
         }
         else
         {
-            userModel.Id = UserId;
+            userModel.Id = _authenticatedUser.UserId;
             userModel.Role = RoleType.Student;
             await _usersService.UpdateAsync(userModel);
         }
