@@ -7,8 +7,13 @@ namespace LearningApp.DataAccess.Repositories;
 public sealed class LectureTestsRepository : RepositoryBase<LectureTest>, ILectureTestsRepository
 {
     public LectureTestsRepository(DbSet<LectureTest> entities)
-        :base(entities)
-    {
+        : base(entities) { }
 
+    public Task<LectureTest?> GetTestAsync(int testId)
+    {
+        return _entities
+            .Include(x => x.LectureTestQuestions)
+            .Include(x => x.LectureTestResults)
+            .FirstOrDefaultAsync(x => x.Id == testId);
     }
 }

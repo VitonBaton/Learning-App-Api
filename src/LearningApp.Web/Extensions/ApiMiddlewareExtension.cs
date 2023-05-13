@@ -19,6 +19,7 @@ public static class ApiMiddlewareExtension
 
         app.MapControllers();
 
+        app.UseStaticFiles();
         return app;
     }
 }

@@ -1,7 +1,6 @@
-﻿using LearningApp.Core.Classifiers;
-using LearningApp.Models.Auth;
+﻿using LearningApp.Models.Auth;
 using LearningApp.Models.DataTransferObjects;
-using LearningApp.Models.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace LearningApp.Contracts.Services;
 
@@ -18,4 +17,6 @@ public interface IUsersService
     public Task UpdateAsync(UserDto user);
 
     public Task DeleteAsync(int id);
+
+    Task AddPhotoToUser(int userId, IFormFile image);
 }

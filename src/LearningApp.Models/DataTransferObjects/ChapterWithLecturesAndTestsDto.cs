@@ -1,12 +1,12 @@
 ﻿namespace LearningApp.Models.DataTransferObjects;
 
-public sealed class TestDto
+public sealed class ChapterWithLecturesAndTestsDto
 {
     public int Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
-    public int QuestionsCount { get; set; }
+    public int Order { get; set; }
     public DateTime CreatedAt { get; set; }
-    public IEnumerable<TestQuestionDto> Questions { get; set; }
-    public IEnumerable<TestResultDto> Results { get; set; }
+    public IEnumerable<LectureDto> Lectures { get; set; }
+    public IEnumerable<TestDto> Tests { get; set; }
 }

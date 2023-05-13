@@ -1,6 +1,5 @@
 ﻿using LearningApp.Contracts.Repositories;
 using LearningApp.DataAccess.Repositories;
-using LearningApp.Models;
 using LearningApp.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +16,8 @@ public static class DataAccessServicesExtension
         services.AddScoped<ILecturesRepository, LecturesRepository>();
         services.AddScoped<ILectureTestQuestionsRepository, LectureTestQuestionsRepository>();
         services.AddScoped<ILectureTestsRepository, LectureTestsRepository>();
+        services.AddScoped<ILectureTestResultsRepository, LectureTestResultsRepository>();
+        services.AddScoped<IChapterTestResultsRepository, ChapterTestResultsRepository>();
 
         return services;
     }

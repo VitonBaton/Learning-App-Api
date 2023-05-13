@@ -11,9 +11,9 @@ namespace LearningApp.Web.Controllers;
 [ApiController]
 public class ChaptersController : ControllerBase
 {
-    private readonly ILoggerManager _logger;
     private readonly IChaptersService _chaptersService;
     private readonly ILecturesService _lecturesService;
+    private readonly ILoggerManager _logger;
     private readonly IMapper _mapper;
 
     public ChaptersController(ILoggerManager logger,
@@ -28,108 +28,58 @@ public class ChaptersController : ControllerBase
     }
 
     [HttpGet]
-    [AuthorizeRoles(RoleType.Admin,RoleType.Student)]
+    [AuthorizeRoles(RoleType.Admin, RoleType.Student)]
     public async Task<ActionResult<IEnumerable<ChapterDto>>> GetAllChapters()
     {
-        try
-        {
-            var result = await _chaptersService.GetAllChaptersAsync();
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Something went wrong inside GetAllChapters action: {ex.Message}");
-            return StatusCode(500, "Internal server error");
-        }
+        var result = await _chaptersService.GetAllChaptersAsync();
+        return Ok(result);
     }
 
     [HttpGet("{id:int}/lectures")]
-    [AuthorizeRoles(RoleType.Admin,RoleType.Student)]
+    [AuthorizeRoles(RoleType.Admin, RoleType.Student)]
     public async Task<ActionResult<ChapterDto>> GetChapterWithLectures(int id)
     {
-        try
-        {
-            var result = await _chaptersService.GetChapterWithLectures(id);
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Something went wrong inside GetChapterWithLectures action: {ex.Message}");
-            return StatusCode(500, "Internal server error");
-        }
+        var result = await _chaptersService.GetChapterWithLectures(id);
+        return Ok(result);
     }
 
     [HttpGet("{id:int}/tests")]
-    [AuthorizeRoles(RoleType.Admin,RoleType.Student)]
+    [AuthorizeRoles(RoleType.Admin, RoleType.Student)]
     public async Task<ActionResult<ChapterWithTestsDto>> GetChapterWithTests(int id)
     {
-        try
-        {
-            var result = await _chaptersService.GetChapterWithTests(id);
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Something went wrong inside GetChapterWithTests action: {ex.Message}");
-            return StatusCode(500, "Internal server error");
-        }
+        var result = await _chaptersService.GetChapterWithTests(id);
+        return Ok(result);
+    }
+
+    [HttpGet("allTests")]
+    [AuthorizeRoles(RoleType.Admin, RoleType.Student)]
+    public async Task<ActionResult<IEnumerable<ChapterWithTestsDto>>> GetAllChaptersWithAllTests()
+    {
+        var result = await _chaptersService.GetAllChaptersWithAllTests();
+        return Ok(result);
     }
 
     [HttpPost]
     [AuthorizeRoles(RoleType.Admin)]
-    public async Task<ActionResult<ChapterDto>> CreateChapter([FromBody]ChapterCreateDto chapter)
+    public async Task<ActionResult<ChapterDto>> CreateChapter([FromBody] ChapterCreateDto chapter)
     {
-        try
-        {
-            if (!ModelState.IsValid)
-            {
-                _logger.LogError("Invalid chapter object sent from client.");
-                return BadRequest("Invalid model object");
-            }
-            var createdChapter = await _chaptersService.CreateChapter(chapter);
-            return CreatedAtAction(nameof(GetChapterWithLectures), new { id = createdChapter.Id }, createdChapter);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Something went wrong inside CreateChapter action: {ex.Message}");
-            return StatusCode(500, "Internal server error");
-        }
+        var createdChapter = await _chaptersService.CreateChapter(chapter);
+        return CreatedAtAction(nameof(GetChapterWithLectures), new { id = createdChapter.Id }, createdChapter);
     }
 
     [HttpPut("{id:int}")]
     [AuthorizeRoles(RoleType.Admin)]
-    public async Task<IActionResult> UpdateChapter(int id, [FromBody]ChapterCreateDto chapter)
+    public async Task<IActionResult> UpdateChapter(int id, [FromBody] ChapterCreateDto chapter)
     {
-        try
-        {
-            if (!ModelState.IsValid)
-            {
-                _logger.LogError("Invalid chapter object sent from client.");
-                return BadRequest("Invalid model object");
-            }
-            await _chaptersService.UpdateChapter(id, chapter);
-            return NoContent();
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Something went wrong inside UpdateChapter action: {ex.Message}");
-            return StatusCode(500, "Internal server error");
-        }
+        await _chaptersService.UpdateChapter(id, chapter);
+        return NoContent();
     }
 
     [HttpDelete("{id:int}")]
     [AuthorizeRoles(RoleType.Admin)]
     public async Task<IActionResult> DeleteChapter(int id)
     {
-        try
-        {
-            await _chaptersService.DeleteChapter(id);
-            return NoContent();
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Something went wrong inside DeleteChapter action: {ex.Message}");
-            return StatusCode(500, "Internal server error");
-        }
+        await _chaptersService.DeleteChapter(id);
+        return NoContent();
     }
 }

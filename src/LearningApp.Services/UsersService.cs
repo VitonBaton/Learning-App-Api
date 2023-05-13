@@ -3,12 +3,12 @@ using System.Security.Claims;
 using System.Text;
 using AutoMapper;
 using LearningApp.Contracts.Services;
-using LearningApp.Core.Classifiers;
 using LearningApp.Core.Exceptions;
 using LearningApp.Core.Helpers;
 using LearningApp.Models.Auth;
 using LearningApp.Models.DataTransferObjects;
 using LearningApp.Models.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -17,9 +17,9 @@ namespace LearningApp.Services;
 
 public class UsersService : IUsersService
 {
-    private readonly UserManager<User> _userManager;
-    private readonly RoleManager<Role> _rolesManager;
     private readonly IMapper _mapper;
+    private readonly RoleManager<Role> _rolesManager;
+    private readonly UserManager<User> _userManager;
 
     public UsersService(UserManager<User> userManager, IMapper mapper, RoleManager<Role> rolesManager)
     {
@@ -59,7 +59,7 @@ public class UsersService : IUsersService
 
         userEntity.UserName = UsersHelper.GenerateUserName(user.Email);
 
-        var roleName = user.ToString();
+        var roleName = user.Role.ToString();
         var role = await _rolesManager.FindByNameAsync(roleName);
 
         if (role is null)
@@ -101,6 +101,7 @@ public class UsersService : IUsersService
         {
             throw new NotFoundAppException("User not found");
         }
+
         return _mapper.Map<User, UserDto>(result);
     }
 
@@ -154,6 +155,23 @@ public class UsersService : IUsersService
         }
 
         var result = await _userManager.DeleteAsync(user);
+        if (!result.Succeeded)
+        {
+            throw new AppException(result.Errors.First().Description);
+        }
+    }
+
+    public async Task AddPhotoToUser(int userId, IFormFile image)
+    {
+        var user = await _userManager.FindByIdAsync(userId.ToString());
+
+        if (user is null)
+        {
+            throw new NotFoundAppException("User not found");
+        }
+
+        user.Image = await FilesHelper.SaveFile(image);
+        var result = await _userManager.UpdateAsync(user);
         if (!result.Succeeded)
         {
             throw new AppException(result.Errors.First().Description);
