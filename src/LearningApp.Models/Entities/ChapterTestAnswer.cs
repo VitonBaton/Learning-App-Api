@@ -12,5 +12,8 @@ public sealed class ChapterTestAnswer : BaseEntity
     [Required]
     public string Answer { get; set; } = null!;
 
+    [Required]
+    public bool IsRight { get; set; }
+
     public ChapterTestQuestion? ChapterTestQuestion { get; set; }
 }

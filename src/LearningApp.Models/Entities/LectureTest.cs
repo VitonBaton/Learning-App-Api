@@ -10,10 +10,7 @@ public sealed class LectureTest : BaseEntity
     public int LectureId { get; set; }
 
     [Required]
-    public string Title { get; set; } = null!;
-
-    [Required]
-    public string Description { get; set; } = null!;
+    public string Title { get; set; }
 
     public Lecture? Lecture { get; set; }
     public IEnumerable<LectureTestQuestion>? LectureTestQuestions { get; set; }

@@ -10,10 +10,7 @@ public sealed class ChapterTest : BaseEntity
     public int ChapterId { get; set; }
 
     [Required]
-    public string Title { get; set; } = null!;
-
-    [Required]
-    public string Description { get; set; } = null!;
+    public string Title { get; set; }
 
     public Chapter? Chapter { get; set; }
     public IEnumerable<ChapterTestQuestion>? ChapterTestQuestions { get; set; }

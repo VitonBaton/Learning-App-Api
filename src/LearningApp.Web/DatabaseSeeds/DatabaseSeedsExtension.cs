@@ -8,6 +8,7 @@ public static class DatabaseSeedsExtension
     {
         services.AddTransient<ISeedsProvider, RolesSeed>();
         services.AddTransient<ISeedsProvider, UsersSeed>();
+        services.AddTransient<ISeedsProvider, ChaptersSeed>();
         return services;
     }
 }
