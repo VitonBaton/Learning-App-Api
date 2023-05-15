@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DocumentFormat.OpenXml.Packaging;
+using Microsoft.AspNetCore.Http;
 
 namespace LearningApp.Core.Helpers;
 
@@ -14,5 +15,18 @@ public static class FilesHelper
         await file.CopyToAsync(fileStream);
 
         return path;
+    }
+
+    public static string ReadDocxFileText(string filepath)
+    {
+        using var wordDocument =
+            WordprocessingDocument.Open(filepath, false);
+        if (wordDocument.MainDocumentPart is null)
+        {
+            return string.Empty;
+        }
+
+        var body = wordDocument.MainDocumentPart.Document.Body;
+        return body is null ? string.Empty : body.InnerText;
     }
 }

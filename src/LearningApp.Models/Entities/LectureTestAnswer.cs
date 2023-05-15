@@ -12,5 +12,8 @@ public sealed class LectureTestAnswer : BaseEntity
     [Required]
     public string Answer { get; set; } = null!;
 
+    [Required]
+    public bool IsRight { get; set; }
+
     public LectureTestQuestion? LectureTestQuestion { get; set; }
 }

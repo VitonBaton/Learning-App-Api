@@ -13,6 +13,7 @@ public sealed class LectureTestsRepository : RepositoryBase<LectureTest>, ILectu
     {
         return _entities
             .Include(x => x.LectureTestQuestions)
+            .ThenInclude(x => x.LectureTestAnswers)
             .Include(x => x.LectureTestResults)
             .FirstOrDefaultAsync(x => x.Id == testId);
     }

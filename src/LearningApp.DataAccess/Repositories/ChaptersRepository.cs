@@ -7,10 +7,7 @@ namespace LearningApp.DataAccess.Repositories;
 public sealed class ChaptersRepository : RepositoryBase<Chapter>, IChaptersRepository
 {
     public ChaptersRepository(DbSet<Chapter> entities)
-        :base(entities)
-    {
-
-    }
+        : base(entities) { }
 
     public async Task<IEnumerable<Chapter>> GetAllChaptersAsync()
     {
@@ -26,7 +23,7 @@ public sealed class ChaptersRepository : RepositoryBase<Chapter>, IChaptersRepos
         var result = await FindAll()
             .AsSplitQuery()
             .Include(ch => ch.Lectures)!
-                .ThenInclude(l => l.Tests)
+            .ThenInclude(l => l.Tests)
             .Include(ch => ch.ChapterTests)
             .OrderBy(ch => ch.Order)
             .ToListAsync();
@@ -40,6 +37,8 @@ public sealed class ChaptersRepository : RepositoryBase<Chapter>, IChaptersRepos
 
     public Task<Chapter?> GetChapterWithLectures(int id)
     {
-        return FindByCondition(chapter => chapter.Id.Equals(id)).FirstOrDefaultAsync();
+        return FindByCondition(chapter => chapter.Id.Equals(id))
+            .Include(ch => ch.Lectures)
+            .FirstOrDefaultAsync();
     }
 }
