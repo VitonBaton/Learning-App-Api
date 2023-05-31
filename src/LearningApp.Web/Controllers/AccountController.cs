@@ -3,7 +3,7 @@ using LearningApp.Contracts.Services;
 using LearningApp.Core.Classifiers;
 using LearningApp.Models.Auth;
 using LearningApp.Models.DataTransferObjects;
-using LearningApp.Services.Auth;
+using LearningApp.Web.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -29,9 +29,9 @@ public class AccountController : ControllerBase
     [HttpPost]
     [AllowAnonymous]
     [Route("login")]
-    public async Task<ActionResult<TokenModel>> LoginAsync([FromBody] Login loginModel)
+    public async Task<ActionResult<TokenDto>> LoginAsync([FromBody] LoginDto loginDtoModel)
     {
-        var token = await _usersService.LoginAsync(loginModel.Email, loginModel.Password, _authSettings);
+        var token = await _usersService.LoginAsync(loginDtoModel.Email, loginDtoModel.Password, _authSettings);
         return Ok(token);
     }
 
@@ -111,7 +111,7 @@ public class AccountController : ControllerBase
     [HttpPut]
     [Route("users/current")]
     [AuthorizeRoles(RoleType.Admin, RoleType.Student)]
-    public async Task<ActionResult> UpdateAccount([FromBody] UserDto userModel)
+    public async Task<ActionResult> UpdateAccount([FromBody] UserUpdateDto userModel)
     {
         if (_authenticatedUser.Role == RoleType.Admin)
         {

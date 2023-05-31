@@ -15,6 +15,8 @@ public sealed class ChapterTestQuestion : BaseEntity
     [Required]
     public int Order { get; set; }
 
+    public string? Image { get; set; }
+
     public ChapterTest? ChapterTest { get; set; }
     public IEnumerable<ChapterTestAnswer>? ChapterTestAnswers { get; set; }
 }

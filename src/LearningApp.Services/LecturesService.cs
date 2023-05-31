@@ -4,8 +4,10 @@ using LearningApp.Contracts.Repositories;
 using LearningApp.Contracts.Services;
 using LearningApp.Core.Classifiers;
 using LearningApp.Core.Exceptions;
+using LearningApp.Core.Helpers;
 using LearningApp.Models.DataTransferObjects;
 using LearningApp.Models.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace LearningApp.Services;
 
@@ -16,7 +18,6 @@ public class LecturesService : ILecturesService
     private readonly ILecturesRepository _lecturesRepository;
     private readonly ILectureTestResultsRepository _lectureTestResultsRepository;
     private readonly ILectureTestsRepository _lectureTestsRepository;
-    private readonly ILoggerManager _logger;
     private readonly IMapper _mapper;
 
     public LecturesService(ILecturesRepository lecturesRepository, ILearningContext learningContext,
@@ -26,7 +27,6 @@ public class LecturesService : ILecturesService
     {
         _lecturesRepository = lecturesRepository;
         _learningContext = learningContext;
-        _logger = logger;
         _mapper = mapper;
         _authenticatedUser = authenticatedUser;
         _lectureTestResultsRepository = lectureTestResultsRepository;
@@ -62,6 +62,58 @@ public class LecturesService : ILecturesService
         return _mapper.Map<LectureDto>(result);
     }
 
+    public async Task<Stream> GetLectureFileAsync(int lectureId)
+    {
+        var result = await _lecturesRepository.GetLectureAsync(lectureId);
+        if (result is null)
+        {
+            throw new NotFoundAppException("Lecture not found");
+        }
+
+        if (result.ContentPath is null)
+        {
+            throw new InvalidDataAppException("There is no file for lecture");
+        }
+
+        return FilesHelper.GetFileStream(result.ContentPath);
+    }
+
+    public async Task<TestDto> AddTestAsync(TestCreateDto test)
+    {
+        var createdEntity = _mapper.Map<LectureTest>(test);
+        await _lectureTestsRepository.Create(createdEntity);
+        await _learningContext.SaveChangesAsync(CancellationToken.None);
+        return _mapper.Map<TestDto>(createdEntity);
+    }
+
+    public async Task DeleteTestAsync(int testId)
+    {
+        var testEntity = await _lectureTestsRepository.GetTestAsync(testId);
+        if (testEntity is null)
+        {
+            throw new NotFoundAppException("Test not found");
+        }
+
+        _lectureTestsRepository.Delete(testEntity);
+        await _learningContext.SaveChangesAsync(CancellationToken.None);
+    }
+
+    public async Task DeleteLecture(int lectureId)
+    {
+        var lectureEntity = await _lecturesRepository.GetLectureAsync(lectureId);
+        if (lectureEntity is null)
+        {
+            throw new NotFoundAppException("Lecture not found");
+        }
+
+        _lecturesRepository.Delete(lectureEntity);
+        await _learningContext.SaveChangesAsync(CancellationToken.None);
+        if (lectureEntity.ContentPath is not null)
+        {
+            FilesHelper.DeleteWordFile(lectureEntity.ContentPath);
+        }
+    }
+
     public async Task<TestDto> GetTestAsync(int testId)
     {
         var result = await _lectureTestsRepository.GetTestAsync(testId);
@@ -70,6 +122,55 @@ public class LecturesService : ILecturesService
             throw new NotFoundAppException("Test not found");
         }
 
+        foreach (var question in result.LectureTestQuestions)
+        {
+            if (question.LectureTestAnswers.Count() == 1)
+            {
+                question.LectureTestAnswers = new List<LectureTestAnswer>();
+            }
+        }
+
         return _mapper.Map<TestDto>(result);
+    }
+
+    public async Task<LectureDto> AddLectureAsync(LectureCreateDto lecture)
+    {
+        var createdEntity = _mapper.Map<Lecture>(lecture);
+        createdEntity.CreatedAt = DateTime.UtcNow;
+        await _lecturesRepository.Create(createdEntity);
+        await _learningContext.SaveChangesAsync(CancellationToken.None);
+        return _mapper.Map<LectureDto>(createdEntity);
+    }
+
+    public async Task UpdateLectureAsync(int id, LectureCreateDto lecture)
+    {
+        var lectureEntity = await _lecturesRepository.GetLectureAsync(id);
+        if (lectureEntity is null)
+        {
+            throw new NotFoundAppException("Lecture not found");
+        }
+
+        _mapper.Map(lecture, lectureEntity);
+        _lecturesRepository.Update(lectureEntity);
+        await _learningContext.SaveChangesAsync(CancellationToken.None);
+    }
+
+    public async Task AddLectureFile(int lectureId, IFormFile file)
+    {
+        var lecture = await _lecturesRepository.GetLectureAsync(lectureId);
+
+        if (lecture is null)
+        {
+            throw new NotFoundAppException("Lecture not found");
+        }
+
+        if (!FilesHelper.IsWordFile(file))
+        {
+            throw new InvalidDataAppException("File is not a word file");
+        }
+
+        lecture.ContentPath = await FilesHelper.SaveWordFile(file);
+        _lecturesRepository.Update(lecture);
+        await _learningContext.SaveChangesAsync(CancellationToken.None);
     }
 }

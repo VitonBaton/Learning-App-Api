@@ -38,5 +38,17 @@ public class ChaptersMappingProfile : Profile
                 expression => expression.MapFrom(x => x.User.LastName));
 
         CreateMap<ChapterCreateDto, Chapter>();
+
+        CreateMap<TestCreateDto, ChapterTest>()
+            .ForMember(x => x.ChapterId,
+                expression => expression.MapFrom(x => x.ParentId))
+            .ForMember(x => x.ChapterTestQuestions,
+                expression => expression.MapFrom(x => x.TestQuestions));
+
+        CreateMap<TestQuestionCreateDto, ChapterTestQuestion>()
+            .ForMember(x => x.ChapterTestAnswers,
+                expression => expression.MapFrom(x => x.TestAnswers));
+
+        CreateMap<TestAnswerCreateDto, ChapterTestAnswer>();
     }
 }

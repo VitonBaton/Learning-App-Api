@@ -12,8 +12,7 @@ public sealed class Lecture : BaseEntity
     [Required]
     public string Title { get; set; } = null!;
 
-    [Required]
-    public string Content { get; set; } = null!;
+    public string? ContentPath { get; set; }
 
     [Required]
     public int Order { get; set; }

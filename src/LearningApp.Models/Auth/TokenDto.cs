@@ -1,6 +1,6 @@
 ﻿namespace LearningApp.Models.Auth;
 
-public class TokenModel
+public sealed class TokenDto
 {
     public string Token { get; set; }
 }

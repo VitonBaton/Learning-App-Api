@@ -3,17 +3,20 @@ using System;
 using LearningApp.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace LearningApp.Models.Migrations
+namespace LearningApp.DataAccess.Migrations
 {
     [DbContext(typeof(LearningDbContext))]
-    partial class LearningContextModelSnapshot : ModelSnapshot
+    [Migration("20230526191218_UpdatedUsers")]
+    partial class UpdatedUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,9 +118,6 @@ namespace LearningApp.Models.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("text");
 
                     b.Property<int>("Order")
                         .HasColumnType("integer");
@@ -265,9 +265,6 @@ namespace LearningApp.Models.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("text");
 
                     b.Property<int>("LectureTestId")
                         .HasColumnType("integer");

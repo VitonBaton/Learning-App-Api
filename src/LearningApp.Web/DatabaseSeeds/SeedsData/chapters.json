@@ -1,86 +1,86 @@
 ﻿[
    {
-      "Title": "Introduction to Game Theory",
-      "Description": "Game theory is a mathematical method for studying optimal strategies in games. A game is a process in which two or more parties are involved, fighting for the realization of their interests. Each side has its own goal and uses some strategy that can lead to a win or loss, depending on the behavior of other players. Game theory helps to choose the best strategies taking into account ideas about other participants, their resources and their possible actions[1].\nGame theory is a branch of applied mathematics, more precisely operations research. Most often, the methods of game theory are used in international relations, economics, a little less often in other social sciences — sociology, political science, psychology, ethics, law and others. Since the 1970s, it has been adopted by biologists to study animal behavior and the theory of evolution. It is very important for artificial intelligence and cybernetics, especially with the manifestation of interest in intelligent agents.\nOptimal solutions or strategies in mathematical modeling were proposed as early as the XVIII century . The problems of production and pricing in the conditions of oligopoly, which later became textbook examples of game theory, were considered in the XIX century by A. Cournot and J. Bertrand. At the beginning of the XX century . Emanuel Lasker, Ernst Zermelo and Emil Borel put forward the idea of a mathematical theory of conflict of interest.\nMathematical game theory originates from neoclassical economics. For the first time, mathematical aspects and applications of the theory were outlined in the classic 1944 book by John von Neumann and Oscar Morgenstern \"Game Theory and Economic Behavior\"[2] (English Theory of Games and Economic Behavior).\nThis area of mathematics has found some reflection in public culture. In 1998, the American writer and journalist Sylvia Nazar published a book[3] about the fate of John Forbes Nash, winner of the Alfred Nobel Memorial Prize in Economics and a scientist in the field of game theory; and in 2001, the film \"Mind Games\" was made based on the book. Some American television shows, for example, \"Friend or Foe?\", \"Alias\" or \"NUMB3RS\", periodically refer to the theory in their episodes.\nJohn Nash wrote his dissertation on game theory in 1949, and 45 years later he received the Nobel Prize in Economics. After graduating from Carnegie Polytechnic Institute with two bachelor's and master's degrees, Nash entered Princeton University, where he attended lectures by John von Neumann. In his writings, Nash developed the principles of \"managerial dynamics\". The first concepts of game theory analyzed antagonistic games, when there are losers and players who have won at their expense. Nash develops methods of analysis in which all participants either win or lose. These situations are called \"Nash equilibrium\", or \"non-cooperative equilibrium\", in which the parties use the optimal strategy, which leads to the creation of a stable equilibrium. It is advantageous for players to maintain this balance, since any change will worsen their situation. These works of Nash made a serious contribution to the development of game theory, mathematical tools of economic modeling were revised. Nash shows that the classical approach to A. Smith's competition, when everyone is for himself, is not always optimal. Strategies are more profitable when everyone tries to do better for themselves by doing better for others.\nAlthough game theory originally considered economic models, it remained a formal theory within mathematics until the 1950s. But since the 1950s, attempts have been made to apply the methods of game theory not only in economics, but also in biology, cybernetics, technology, and anthropology. During the Second World War and immediately after it, the military became seriously interested in game theory, who saw in it a powerful apparatus for the study of strategic decisions.\nIn the 1960s and 1970s, interest in game theory waned, despite the significant mathematical results obtained by that time. Since the mid-1980s, the active practical use of game theory has begun, especially in economics and management. Over the past 20-30 years, the importance of game theory and interest in it has been growing significantly, some areas of modern economic theory cannot be stated without the use of game theory.\nHistorically, games with complete information, in which it is relatively easy to analyze the strategy of all participants, were the first to enter the sphere of interests of mathematicians. Then the attention of researchers was attracted by \"games with incomplete information\". After analyzing poker and other games of this class, mathematicians tried to apply the mathematical apparatus to games of a \"global scale\" — wars, economics, and even to ordinary divorces.\nMathematical game theory is now rapidly developing, dynamic games are being considered. However, the mathematical apparatus of game theory is expensive[4]. It is used for justified tasks: politics, the economics of monopolies and the distribution of market power, etc. A number of well-known scientists have become Nobel laureates in economics for their contribution to the development of game theory, which describes socio-economic processes. J. Nash, thanks to his research in game theory, became one of the leading experts in the field of conducting the \"cold war\", which confirms the scale of the tasks that game theory deals with.\nThe winners of the Alfred Nobel Prize in Economics for achievements in the field of game theory and economic theory are: Robert Auman, Reinhard Zelten, John Nash, John Harsanyi, William Vickrey, James Mirrlees, Thomas Schelling, George Akerlof, Michael Spence, Joseph Stiglitz, Leonid Hurwitz, Eric Maskin, Roger Myerson, Lloyd Shapley, Alvin Roth, Jean Tirol, Paul Milgrom, Robert Wilston.",
+      "Title": "博弈论导论",
+      "Description": "博弈论是研究游戏中最优策略的数学方法。 一个游戏是一个过程，其中两个或更多方参与，争取实现他们的利益。 每一方都有自己的目标，并使用一些策略，可以导致输赢，这取决于其他玩家的行为。 博弈论有助于选择最佳策略，同时考虑到其他参与者的想法，他们的资源和他们可能的行动[1]。\\N博弈论是应用数学的一个分支，更确切地说是运筹学。 大多数情况下，博弈论的方法被用于国际关系，经济学，在其他社会科学中不太常见—社会学，政治学，心理学，伦理学，法律等。 自20世纪70年代以来，它被生物学家采用来研究动物行为和进化论。 它对于人工智能和控制论非常重要，特别是随着对智能代理的兴趣的表现。\\n数学建模中的最优解或策略早在十八世纪就被提出。 在寡头垄断条件下的生产和定价问题，后来成为博弈论的教科书例子，在十九世纪由A.Cournot和J.Bertrand考虑。 在二十世纪初。 Emanuel Lasker，Ernst Zermelo和Emil Borel提出了利益冲突的数学理论的想法。\\n数学博弈论起源于新古典经济学。 约翰*冯*诺伊曼和奥斯卡*摩根斯滕（Oscar Morgenstern）在1944年的经典着作《博弈论与经济行为》（英语Theory Of Games And Economic Behavior）中首次概述了该理论的数学方面和应用。\\N这个数学领域在公共文化中找到了一些反思。 1998年，美国作家兼记者西尔维亚*纳扎尔（Sylvia Nazar）出版了一本书[3]，讲述了诺贝尔经济学奖得主、博弈论领域科学家约翰*福布斯*纳什（John Forbes Nash）的命运；2001年，电影\\\"Mind Games\\\" 一些美国电视节目，例如，\\\"朋友还是敌人？\\\"，\\\"别名\\\"或\\\"NUMB3RS\\\"，定期参考理论在他们的情节。\\N约翰*纳什在1949年写了他关于博弈论的论文，45年后他获得了诺贝尔经济学奖。 从卡内基理工学院获得两个学士和硕士学位后，纳什进入普林斯顿大学，在那里他参加了约翰*冯*诺伊曼的讲座。 在他的着作中，纳什发展了\"管理动力学\"的原则。 博弈论的第一个概念分析了对抗性游戏，当有输家和以牺牲自己为代价赢得胜利的玩家时。 纳什开发的分析方法中，所有参与者要么赢，要么输。 这些情况被称为\"纳什均衡\"，或\"非合作均衡\"，其中各方使用最优策略，从而产生稳定均衡。 玩家保持这种平衡是有利的，因为任何变化都会使他们的情况恶化。 纳什的这些着作对博弈论的发展做出了重大贡献，对经济建模的数学工具进行了修订。 纳什表明，经典的方法A.史密斯的竞争，当每个人都为自己，并不总是最优的。 当每个人都试图通过为他人做得更好来为自己做得更好时，策略就会更有利可图。\\n尽管博弈论最初考虑的是经济模型，但直到20世纪50年代，它仍然是数学中的一种形式理论。 但是自20世纪50年代以来，已经尝试将博弈论的方法不仅应用于经济学，还应用于生物学，控制论，技术和人类学。 在第二次世界大战期间及其之后，军方对博弈论产生了浓厚的兴趣，他们在其中看到了研究战略决策的强大设备。\\n在20世纪60年代和70年代，对博弈论的兴趣减弱，尽管当时获得了显着的数学结果。 自20世纪80年代中期以来，博弈论的积极实际应用已经开始，特别是在经济学和管理学方面。 在过去的20-30年里，博弈论的重要性和对它的兴趣一直在显着增长，现代经济理论的某些领域不能在不使用博弈论的情况下进行陈述。\\N历史上，具有完整信息的游戏，其中分析所有参与者的策略相对容易，是第一个进入数学家兴趣领域的游戏。 然后研究人员的注意力被\"信息不完整的游戏\"所吸引。 在分析了扑克和其他这类游戏之后，数学家们试图将数学装置应用于\"全球范围\"的游戏--战争、经济学，甚至是普通的离婚。\\n数学博弈论现在发展迅速，动态博弈正在被考虑。 然而，博弈论的数学装置是昂贵的[4]。 它用于合理的任务：政治，垄断经济学和市场权力分配等。 一些着名的科学家已经成为诺贝尔经济学奖得主，因为他们对博弈论的发展做出了贡献，博弈论描述了社会经济过程。 J. 纳什，由于他在博弈论的研究，成为在进行\\\"冷战\\\"，这证实了博弈论处理的任务的规模领域的领先专家之一。\\n博弈论和经济理论领域成就的阿尔弗雷德诺贝尔经济学奖得主有：罗伯特*奥曼、莱因哈德*泽尔滕、约翰*纳什、约翰*哈桑尼、威廉*维克里、詹姆斯*米尔莱斯、托马斯*谢林、乔治*阿克洛夫、迈克尔*斯宾塞、约瑟夫*斯蒂格利茨、列昂尼德*赫维茨、埃里克*马斯金、罗杰*迈尔森、劳埃德*沙普利、阿尔文*罗斯、让*蒂罗尔、保罗*米尔格罗姆、罗伯特*威尔斯顿。",
       "Order": 1,
       "Lectures": [
       ]
    },
    {
-      "Title": "Matrix Games",
-      "Description": "Matrix games are a fundamental concept in game theory, providing a concise representation of strategic interactions between players. This section will introduce the concept of matrix games, explain their structure, and demonstrate their relevance in analyzing decision-making scenarios.",
+      "Title": "矩阵游戏",
+      "Description": "矩阵游戏是博弈论中的一个基本概念，提供了玩家之间战略互动的简洁表示。 本节将介绍矩阵游戏的概念，解释它们的结构，并展示它们在分析决策场景中的相关性。",
       "Order": 2,
       "Lectures": [
          {
-            "Title": "Structure of Matrix Games",
-            "Content": "2.1. Matrix Representation:\nMatrix games employ a tabular representation, with players' strategies listed as rows and columns of a matrix. This structure allows for a clear depiction of the available choices and corresponding payoffs for each player.\n2.2. Payoff Matrix:\nThe cells of the matrix represent the payoffs received by players based on the combination of strategies they choose. Payoffs are typically represented by numerical values, reflecting the players' preferences or utility.",
+            "Title": "矩阵游戏的结构",
+            "ContentPath": "Documents/lecture1.docx",
             "Order": 1,
             "Tests": [
                {
-                  "Title": "Test about structure of Matrix Games",
+                  "Title": "关于矩阵游戏结构的测试",
                   "LectureTestQuestions": [
                      {
                         "Order": 1,
-                        "Question": "In matrix games, how are players' strategies represented?",
+                        "Question": "在矩阵游戏中，玩家的策略是如何表示的？",
                         "LectureTestAnswers": [
                            {
-                              "Answer": "As a series of sequential steps",
+                              "Answer": "作为一系列顺序步骤",
                               "IsRight": false
                            },
                            {
-                              "Answer": "As a network of interconnected nodes",
+                              "Answer": "作为一个互相连接的节点网络",
                               "IsRight": false
                            },
                            {
-                              "Answer": "As rows and columns in a matrix",
+                              "Answer": "作为矩阵中的行和列",
                               "IsRight": true
                            },
                            {
-                              "Answer": "As a tree-like structure",
+                              "Answer": "作为树状结构",
                               "IsRight": false
                            }
                         ]
                      },
                      {
                         "Order": 2,
-                        "Question": "What do the cells of a payoff matrix in a matrix game represent?",
+                        "Question": "矩阵游戏中的支付矩阵的单元格表示什么？",
                         "LectureTestAnswers": [
                            {
-                              "Answer": "Players' initial investments",
+                              "Answer": "玩家的初始投资",
                               "IsRight": false
                            },
                            {
-                              "Answer": "Players' probabilities of winning",
+                              "Answer": "玩家获胜的概率",
                               "IsRight": false
                            },
                            {
-                              "Answer": "Players' payoffs based on their chosen strategies",
+                              "Answer": "基于玩家选择的策略而得出的玩家回报",
                               "IsRight": true
                            },
                            {
-                              "Answer": "Players' time constraints in decision-making",
+                              "Answer": "玩家在决策中的时间限制",
                               "IsRight": false
                            }
                         ]
                      },
                      {
                         "Order": 3,
-                        "Question": "Which term describes a situation in matrix games where no player has an incentive to unilaterally deviate from their chosen strategy?",
+                        "Question": "矩阵游戏中描述一个没有玩家有动机单方面放弃其选择的策略的情况的术语是什么？",
                         "LectureTestAnswers": [
                            {
-                              "Answer": "Perfect equilibrium",
+                              "Answer": "完美均衡",
                               "IsRight": false
                            },
                            {
-                              "Answer": "Optimal outcome",
+                              "Answer": "最优结果",
                               "IsRight": false
                            },
                            {
-                              "Answer": "Nash equilibrium",
+                              "Answer": "纳什均衡",
                               "IsRight": true
                            },
                            {
-                              "Answer": "Dominant strategy",
+                              "Answer": "占优策略",
                               "IsRight": false
                            }
                         ]
@@ -90,13 +90,13 @@
             ]
          },
          {
-            "Title": "Strategic Interactions",
-            "Content": "3.1. Players and Strategies:\nMatrix games involve two or more players, each having a set of strategies available to them. The players aim to maximize their payoffs by strategically selecting the best response to the other players' choices.\n3.2. Simultaneous Decision-Making:\nIn matrix games, players make decisions simultaneously, without knowledge of the other players' choices. This adds an element of uncertainty and strategic thinking to the decision-making process.\n3.3. Rationality and Self-Interest:\nPlayers are assumed to be rational decision-makers who seek to maximize their own outcomes. Matrix games provide a framework for analyzing how rational players navigate strategic interactions.",
+            "Title": "战略互动",
+            "ContentPath": "Documents/lecture2.docx",
             "Order": 2
          },
          {
-            "Title": "Payoff Analysis",
-            "Content": "4.1. Nash Equilibrium:\nNash equilibrium is a key concept in matrix games, representing a stable outcome where no player has an incentive to unilaterally deviate from their chosen strategy. This section will explain the concept of Nash equilibrium and its significance in analyzing matrix games.\n4.2. Dominant and Dominated Strategies:\nMatrix games allow the identification of dominant strategies, where a player's choice always yields a better outcome regardless of the other players' decisions. Dominated strategies, on the other hand, are never optimal and can be eliminated from consideration.\n4.3. Mixed Strategies:\nMixed strategies involve randomizing between different pure strategies based on probabilities. This section will introduce the concept of mixed strategies and their role in achieving equilibrium in certain matrix games.",
+            "Title": "回报分析",
+            "ContentPath": "Documents/lecture3.docx",
             "Order": 3
          }
       ]

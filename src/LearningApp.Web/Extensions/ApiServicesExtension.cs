@@ -1,9 +1,11 @@
 ﻿using System.Text.Json.Serialization;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using LearningApp.DataAccess;
 using LearningApp.LoggerService;
 using LearningApp.Models.Auth;
 using LearningApp.Services;
-using LearningApp.Services.Auth;
+using LearningApp.Web.Auth;
 using LearningApp.Web.DatabaseSeeds;
 using LearningApp.Web.HttpContexts;
 using LearningApp.Web.Middlewares;
@@ -35,6 +37,8 @@ public static class ApiServicesExtension
             .AddEndpointsApiExplorer()
             .AddSwaggerGen()
             .AddRepositories()
+            .AddFluentValidationAutoValidation()
+            .AddValidatorsFromAssembly(typeof(IWebAssemblyMarker).Assembly)
             .AddPostgreSqlDbContext(o => o.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL")))
             .AddBllServices()
             .AddLogger()

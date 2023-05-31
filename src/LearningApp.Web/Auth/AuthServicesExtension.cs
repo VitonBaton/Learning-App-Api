@@ -4,17 +4,14 @@ using LearningApp.Models.Auth;
 using LearningApp.Models.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
-namespace LearningApp.Services.Auth;
+namespace LearningApp.Web.Auth;
 
 public static class AuthServicesExtension
 {
     public static IServiceCollection AddAuth(this IServiceCollection services, AuthSettings authSettings)
     {
-
         services
             .AddIdentityCore<User>(options =>
             {
@@ -42,14 +39,11 @@ public static class AuthServicesExtension
                 {
                     ValidateIssuer = true,
                     ValidIssuer = authSettings.Issuer,
-
                     ValidateAudience = true,
                     ValidAudience = authSettings.Audience,
-
                     ValidateLifetime = true,
-
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authSettings.SecurityKey)),
-                    ValidateIssuerSigningKey = true,
+                    ValidateIssuerSigningKey = true
                 };
             });
 

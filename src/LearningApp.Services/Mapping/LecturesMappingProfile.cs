@@ -29,5 +29,19 @@ public class LecturesMappingProfile : Profile
                 expression => expression.MapFrom(x => x.User.FirstName))
             .ForMember(x => x.LastName,
                 expression => expression.MapFrom(x => x.User.LastName));
+
+        CreateMap<LectureCreateDto, Lecture>();
+
+        CreateMap<TestCreateDto, LectureTest>()
+            .ForMember(x => x.LectureId,
+                expression => expression.MapFrom(x => x.ParentId))
+            .ForMember(x => x.LectureTestQuestions,
+                expression => expression.MapFrom(x => x.TestQuestions));
+
+        CreateMap<TestQuestionCreateDto, LectureTestQuestion>()
+            .ForMember(x => x.LectureTestAnswers,
+                expression => expression.MapFrom(x => x.TestAnswers));
+
+        CreateMap<TestAnswerCreateDto, LectureTestAnswer>();
     }
 }

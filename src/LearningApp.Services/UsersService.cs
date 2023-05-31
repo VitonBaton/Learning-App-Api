@@ -28,7 +28,7 @@ public class UsersService : IUsersService
         _rolesManager = rolesManager;
     }
 
-    public async Task<TokenModel> LoginAsync(string email, string password, AuthSettings authSettings)
+    public async Task<TokenDto> LoginAsync(string email, string password, AuthSettings authSettings)
     {
         var user = await _userManager.FindByEmailAsync(email);
         if (user is null || !await _userManager.CheckPasswordAsync(user, password))
@@ -50,7 +50,7 @@ public class UsersService : IUsersService
             issuer: authSettings.Issuer,
             audience: authSettings.Audience,
             signingCredentials: new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256));
-        return new TokenModel { Token = new JwtSecurityTokenHandler().WriteToken(token) };
+        return new TokenDto { Token = new JwtSecurityTokenHandler().WriteToken(token) };
     }
 
     public async Task<UserDto> AddAsync(UserRegistrationDto user)
@@ -105,7 +105,7 @@ public class UsersService : IUsersService
         return _mapper.Map<User, UserDto>(result);
     }
 
-    public async Task UpdateAsync(UserDto user)
+    public async Task UpdateAsync(UserUpdateDto user)
     {
         var userEntity = await _userManager.FindByIdAsync(user.Id.ToString());
 
@@ -170,7 +170,12 @@ public class UsersService : IUsersService
             throw new NotFoundAppException("User not found");
         }
 
-        user.Image = await FilesHelper.SaveFile(image);
+        if (!FilesHelper.IsImage(image))
+        {
+            throw new InvalidDataAppException("File is not an image");
+        }
+
+        user.Image = await FilesHelper.SaveImageFile(image);
         var result = await _userManager.UpdateAsync(user);
         if (!result.Succeeded)
         {
