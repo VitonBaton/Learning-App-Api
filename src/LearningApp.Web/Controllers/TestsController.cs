@@ -1,8 +1,9 @@
-﻿using AutoMapper;
-using LearningApp.Contracts.Services;
+﻿using LearningApp.Contracts.Services;
 using LearningApp.Core.Classifiers;
+using LearningApp.Core.Exceptions;
+using LearningApp.Core.Helpers;
 using LearningApp.Models.DataTransferObjects;
-using LearningApp.Services.Auth;
+using LearningApp.Web.Auth;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LearningApp.Web.Controllers;
@@ -13,17 +14,11 @@ public class TestsController : ControllerBase
 {
     private readonly IChaptersService _chaptersService;
     private readonly ILecturesService _lecturesService;
-    private readonly ILoggerManager _logger;
-    private readonly IMapper _mapper;
 
-    public TestsController(ILoggerManager logger,
-        IChaptersService chaptersService,
-        IMapper mapper,
+    public TestsController(IChaptersService chaptersService,
         ILecturesService lecturesService)
     {
-        _logger = logger;
         _chaptersService = chaptersService;
-        _mapper = mapper;
         _lecturesService = lecturesService;
     }
 
@@ -61,5 +56,50 @@ public class TestsController : ControllerBase
         }
 
         return Ok(result);
+    }
+
+    [HttpPost]
+    [AuthorizeRoles(RoleType.Admin)]
+    public async Task<ActionResult<TestDto>> AddTest([FromQuery] TestType testType, [FromBody] TestCreateDto test)
+    {
+        TestDto result;
+        if (testType == TestType.Lecture)
+        {
+            result = await _lecturesService.AddTestAsync(test);
+        }
+        else
+        {
+            result = await _chaptersService.AddTestAsync(test);
+        }
+
+        return Ok(result);
+    }
+
+    [HttpDelete("{testId:int}")]
+    [AuthorizeRoles(RoleType.Admin)]
+    public async Task<IActionResult> DeleteTest([FromQuery] TestType testType, [FromRoute] int testId)
+    {
+        if (testType == TestType.Lecture)
+        {
+            await _lecturesService.DeleteTestAsync(testId);
+        }
+        else
+        {
+            await _chaptersService.DeleteTestAsync(testId);
+        }
+
+        return Ok("Test created successfully");
+    }
+
+    [HttpPost("image")]
+    [AuthorizeRoles(RoleType.Admin)]
+    public async Task<ActionResult<TestImageDto>> UploadQuestionImage(IFormFile image)
+    {
+        if (!FilesHelper.IsImage(image))
+        {
+            throw new InvalidDataAppException("File is not an image");
+        }
+
+        return Ok(new TestImageDto { Path = await FilesHelper.SaveImageFile(image) });
     }
 }

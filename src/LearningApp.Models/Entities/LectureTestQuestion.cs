@@ -15,6 +15,8 @@ public sealed class LectureTestQuestion : BaseEntity
     [Required]
     public int Order { get; set; }
 
+    public string? Image { get; set; }
+
     public LectureTest? LectureTest { get; set; }
     public IEnumerable<LectureTestAnswer>? LectureTestAnswers { get; set; }
 }

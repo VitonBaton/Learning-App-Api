@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using LearningApp.Models.DataTransferObjects;
 
-namespace LearningApp.Services.ValidationRules;
+namespace LearningApp.Web.ValidationRules;
 
 public class ChapterCreateDtoValidator : AbstractValidator<ChapterCreateDto>
 {

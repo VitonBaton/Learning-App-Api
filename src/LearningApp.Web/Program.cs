@@ -3,7 +3,7 @@ using LearningApp.DataAccess;
 using LearningApp.Web.Extensions;
 
 var builder =
-    WebApplication.CreateBuilder(new WebApplicationOptions { WebRootPath = FilesHelper.BasePath, Args = args });
+    WebApplication.CreateBuilder(new WebApplicationOptions { WebRootPath = FilesHelper.BaseImagesPath, Args = args });
 
 builder.Host.UseDefaultServiceProvider(options =>
 {

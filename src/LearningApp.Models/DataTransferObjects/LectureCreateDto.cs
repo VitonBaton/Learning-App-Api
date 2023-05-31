@@ -1,8 +1,8 @@
 ﻿namespace LearningApp.Models.DataTransferObjects;
 
-public sealed class LectureDto
+public sealed class LectureCreateDto
 {
-    public int Id { get; set; }
+    public int ChapterId { get; set; }
     public string Title { get; set; }
     public int Order { get; set; }
 }

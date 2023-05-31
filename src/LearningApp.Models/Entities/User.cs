@@ -15,5 +15,5 @@ public sealed class User : IdentityUser<int>
     [Required]
     public DateTime CreatedAt { get; set; }
 
-    public string Image { get; set; }
+    public string? Image { get; set; }
 }

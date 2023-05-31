@@ -23,4 +23,8 @@ public interface IChaptersService
     Task<IEnumerable<TestResultDto>> GetTestResults(int testId);
 
     Task<TestDto> GetTestAsync(int testId);
+
+    Task<TestDto> AddTestAsync(TestCreateDto test);
+
+    Task DeleteTestAsync(int testId);
 }

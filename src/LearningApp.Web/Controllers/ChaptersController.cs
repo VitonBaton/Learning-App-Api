@@ -2,7 +2,7 @@
 using LearningApp.Contracts.Services;
 using LearningApp.Core.Classifiers;
 using LearningApp.Models.DataTransferObjects;
-using LearningApp.Services.Auth;
+using LearningApp.Web.Auth;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LearningApp.Web.Controllers;

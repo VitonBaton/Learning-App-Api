@@ -1,7 +1,7 @@
 ﻿using LearningApp.Core.Classifiers;
 using Microsoft.AspNetCore.Authorization;
 
-namespace LearningApp.Services.Auth;
+namespace LearningApp.Web.Auth;
 
 public class AuthorizeRolesAttribute : AuthorizeAttribute
 {

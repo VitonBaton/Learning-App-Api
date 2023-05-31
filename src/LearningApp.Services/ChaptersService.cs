@@ -148,6 +148,26 @@ public class ChaptersService : IChaptersService
         return _mapper.Map<TestDto>(result);
     }
 
+    public async Task<TestDto> AddTestAsync(TestCreateDto test)
+    {
+        var createdEntity = _mapper.Map<ChapterTest>(test);
+        await _chapterTestsRepository.Create(createdEntity);
+        await _learningContext.SaveChangesAsync(CancellationToken.None);
+        return _mapper.Map<TestDto>(createdEntity);
+    }
+
+    public async Task DeleteTestAsync(int testId)
+    {
+        var testEntity = await _chapterTestsRepository.GetTestAsync(testId);
+        if (testEntity is null)
+        {
+            throw new NotFoundAppException("Test not found");
+        }
+
+        _chapterTestsRepository.Delete(testEntity);
+        await _learningContext.SaveChangesAsync(CancellationToken.None);
+    }
+
     private ChapterWithTestsDto AsChapterWithTestsDto(Chapter chapter)
     {
         var tests = new List<TestDto>();

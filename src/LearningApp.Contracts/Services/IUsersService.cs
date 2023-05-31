@@ -6,7 +6,7 @@ namespace LearningApp.Contracts.Services;
 
 public interface IUsersService
 {
-    public Task<TokenModel> LoginAsync(string email, string password, AuthSettings authSettings);
+    public Task<TokenDto> LoginAsync(string email, string password, AuthSettings authSettings);
 
     public Task<UserDto> AddAsync(UserRegistrationDto user);
 
@@ -14,7 +14,7 @@ public interface IUsersService
 
     public Task<UserDto> GetSingleAsync(int id);
 
-    public Task UpdateAsync(UserDto user);
+    public Task UpdateAsync(UserUpdateDto user);
 
     public Task DeleteAsync(int id);
 
