@@ -168,16 +168,53 @@ public class ChaptersService : IChaptersService
         await _learningContext.SaveChangesAsync(CancellationToken.None);
     }
 
+    public async Task<TestResultDto> CheckAnswersAsync(int testId, PassedTestDto test)
+    {
+        var testEntity = await _chapterTestsRepository.GetTestAsync(testId);
+        if (testEntity is null)
+        {
+            throw new NotFoundAppException("Test not found");
+        }
+
+        var rightAnswersCount = testEntity.ChapterTestQuestions
+            .Select(question =>
+                new { question, passedQuestion = test.Questions.FirstOrDefault(x => x.Id == question.Id) })
+            .Where(t => t.passedQuestion is not null)
+            .Where(t => CompareAnswers(t.question.ChapterTestAnswers, t.passedQuestion.Answers))
+            .Select(t => t.question).Count();
+
+        var result = new ChapterTestResult
+        {
+            UserId = _authenticatedUser.UserId,
+            Attempt = testEntity.ChapterTestResults.Count() + 1,
+            CompletionTimeInSeconds = test.CompletionTimeInSeconds,
+            QuestionsCount = testEntity.ChapterTestQuestions.Count(),
+            RightAnswers = rightAnswersCount,
+            ChapterTestId = testEntity.Id
+        };
+
+        await _chapterTestResultsRepository.Create(result);
+        await _learningContext.SaveChangesAsync(CancellationToken.None);
+        return _mapper.Map<TestResultDto>(result);
+    }
+
+    private static bool CompareAnswers(IEnumerable<ChapterTestAnswer> answers, IEnumerable<string> passedAnswers)
+    {
+        var rightAnswers = answers.Where(x => x.IsRight).ToList();
+        return rightAnswers.Count == passedAnswers.Count() &&
+            answers.All(answer => passedAnswers.Any(x => x == answer.Answer));
+    }
+
     private ChapterWithTestsDto AsChapterWithTestsDto(Chapter chapter)
     {
-        var tests = new List<TestDto>();
+        var tests = new List<SimpleTestDto>();
         chapter.Lectures = chapter.Lectures.OrderBy(l => l.Order);
         foreach (var lecture in chapter.Lectures)
         {
-            tests.AddRange(_mapper.Map<IEnumerable<TestDto>>(lecture.Tests));
+            tests.AddRange(_mapper.Map<IEnumerable<SimpleTestDto>>(lecture.Tests));
         }
 
-        tests.AddRange(_mapper.Map<IEnumerable<TestDto>>(chapter.ChapterTests));
+        tests.AddRange(_mapper.Map<IEnumerable<SimpleTestDto>>(chapter.ChapterTests));
 
         return new ChapterWithTestsDto
         {

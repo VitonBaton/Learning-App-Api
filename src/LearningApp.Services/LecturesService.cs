@@ -51,7 +51,7 @@ public class LecturesService : ILecturesService
         return _mapper.Map<IEnumerable<TestResultDto>>(result);
     }
 
-    public async Task<LectureDto> GetLectureAsync(int lectureId)
+    public async Task<LectureWithTestsDto> GetLectureAsync(int lectureId)
     {
         var result = await _lecturesRepository.GetLectureAsync(lectureId);
         if (result is null)
@@ -59,7 +59,7 @@ public class LecturesService : ILecturesService
             throw new NotFoundAppException("Lecture not found");
         }
 
-        return _mapper.Map<LectureDto>(result);
+        return _mapper.Map<LectureWithTestsDto>(result);
     }
 
     public async Task<Stream> GetLectureFileAsync(int lectureId)
@@ -112,6 +112,36 @@ public class LecturesService : ILecturesService
         {
             FilesHelper.DeleteWordFile(lectureEntity.ContentPath);
         }
+    }
+
+    public async Task<TestResultDto> CheckAnswersAsync(int testId, PassedTestDto test)
+    {
+        var testEntity = await _lectureTestsRepository.GetTestAsync(testId);
+        if (testEntity is null)
+        {
+            throw new NotFoundAppException("Test not found");
+        }
+
+        var rightAnswersCount = testEntity.LectureTestQuestions
+            .Select(question =>
+                new { question, passedQuestion = test.Questions.FirstOrDefault(x => x.Id == question.Id) })
+            .Where(t => t.passedQuestion is not null)
+            .Where(t => CompareAnswers(t.question.LectureTestAnswers, t.passedQuestion.Answers))
+            .Select(t => t.question).Count();
+
+        var result = new LectureTestResult
+        {
+            UserId = _authenticatedUser.UserId,
+            Attempt = testEntity.LectureTestResults.Count() + 1,
+            CompletionTimeInSeconds = test.CompletionTimeInSeconds,
+            QuestionsCount = testEntity.LectureTestQuestions.Count(),
+            RightAnswers = rightAnswersCount,
+            LectureTestId = testEntity.Id
+        };
+
+        await _lectureTestResultsRepository.Create(result);
+        await _learningContext.SaveChangesAsync(CancellationToken.None);
+        return _mapper.Map<TestResultDto>(result);
     }
 
     public async Task<TestDto> GetTestAsync(int testId)
@@ -172,5 +202,12 @@ public class LecturesService : ILecturesService
         lecture.ContentPath = await FilesHelper.SaveWordFile(file);
         _lecturesRepository.Update(lecture);
         await _learningContext.SaveChangesAsync(CancellationToken.None);
+    }
+
+    private static bool CompareAnswers(IEnumerable<LectureTestAnswer> answers, IEnumerable<string> passedAnswers)
+    {
+        var rightAnswers = answers.Where(x => x.IsRight).ToList();
+        return rightAnswers.Count == passedAnswers.Count() &&
+            answers.All(answer => passedAnswers.Any(x => x == answer.Answer));
     }
 }

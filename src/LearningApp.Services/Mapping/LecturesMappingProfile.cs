@@ -9,6 +9,7 @@ public class LecturesMappingProfile : Profile
     public LecturesMappingProfile()
     {
         CreateMap<Lecture, LectureDto>();
+        CreateMap<Lecture, LectureWithTestsDto>();
         CreateMap<LectureTest, LectureTestWithQuestionsDto>()
             .ForMember(lt => lt.Questions,
                 expression => expression.MapFrom(lt => lt.LectureTestQuestions));
@@ -19,7 +20,9 @@ public class LecturesMappingProfile : Profile
                 expression => expression.MapFrom(lt => lt.LectureTestResults))
             .ForMember(lt => lt.QuestionsCount,
                 expression => expression.MapFrom(lt => lt.LectureTestQuestions.Count()));
-        ;
+
+        CreateMap<LectureTest, SimpleTestDto>();
+
         CreateMap<LectureTestQuestion, TestQuestionDto>()
             .ForMember(ltq => ltq.Answers,
                 expression => expression.MapFrom(ltq =>

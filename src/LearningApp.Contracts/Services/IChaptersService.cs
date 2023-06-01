@@ -27,4 +27,6 @@ public interface IChaptersService
     Task<TestDto> AddTestAsync(TestCreateDto test);
 
     Task DeleteTestAsync(int testId);
+
+    Task<TestResultDto> CheckAnswersAsync(int testId, PassedTestDto test);
 }

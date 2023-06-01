@@ -31,6 +31,8 @@ public class ChaptersMappingProfile : Profile
                 expression => expression.MapFrom(ltq =>
                     ltq.ChapterTestAnswers!.Select(lta => lta.Answer)));
 
+        CreateMap<ChapterTest, SimpleTestDto>();
+
         CreateMap<ChapterTestResult, TestResultDto>()
             .ForMember(x => x.FirstName,
                 expression => expression.MapFrom(x => x.User.FirstName))
