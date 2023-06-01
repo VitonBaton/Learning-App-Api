@@ -102,4 +102,22 @@ public class TestsController : ControllerBase
 
         return Ok(new TestImageDto { Path = await FilesHelper.SaveImageFile(image) });
     }
+
+    [HttpPost("{testId:int}/results")]
+    [AuthorizeRoles(RoleType.Admin, RoleType.Student)]
+    public async Task<ActionResult<TestResultDto>> SendTestResults(int testId,
+        [FromQuery] TestType testType, PassedTestDto test)
+    {
+        TestResultDto result;
+        if (testType == TestType.Lecture)
+        {
+            result = await _lecturesService.CheckAnswersAsync(testId, test);
+        }
+        else
+        {
+            result = await _chaptersService.CheckAnswersAsync(testId, test);
+        }
+
+        return Ok(result);
+    }
 }

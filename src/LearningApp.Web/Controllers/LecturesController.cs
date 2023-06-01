@@ -29,7 +29,7 @@ public class LecturesController : ControllerBase
 
     [HttpGet("{lectureId:int}")]
     [AuthorizeRoles(RoleType.Admin, RoleType.Student)]
-    public async Task<ActionResult<LectureDto>> GetLecture(int lectureId)
+    public async Task<ActionResult<LectureWithTestsDto>> GetLecture(int lectureId)
     {
         var result = await _lecturesService.GetLectureAsync(lectureId);
 

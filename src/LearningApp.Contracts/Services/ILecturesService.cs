@@ -10,7 +10,7 @@ public interface ILecturesService
 
     Task<IEnumerable<TestResultDto>> GetTestResultsAsync(int testId);
 
-    Task<LectureDto> GetLectureAsync(int lectureId);
+    Task<LectureWithTestsDto> GetLectureAsync(int lectureId);
 
     Task<TestDto> GetTestAsync(int testId);
 
@@ -27,4 +27,6 @@ public interface ILecturesService
     Task DeleteTestAsync(int testId);
 
     Task DeleteLecture(int lectureId);
+
+    Task<TestResultDto> CheckAnswersAsync(int testId, PassedTestDto test);
 }

@@ -19,7 +19,10 @@ public sealed class LecturesRepository : RepositoryBase<Lecture>, ILecturesRepos
 
     public async Task<Lecture?> GetLectureAsync(int lectureId)
     {
-        var result = await _entities.FindAsync(lectureId);
+        var result = await _entities
+            .AsNoTracking()
+            .Include(lecture => lecture.Tests)
+            .FirstOrDefaultAsync(lecture => lecture.Id == lectureId);
         return result;
     }
 }
