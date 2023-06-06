@@ -16,6 +16,11 @@ public class ChaptersMappingProfile : Profile
             .ForMember(c => c.Tests,
                 expression => expression.MapFrom(c => c.ChapterTests));
 
+
+        CreateMap<Chapter, ChapterWithLecturesAndTestsDto>()
+            .ForMember(c => c.Tests,
+                expression => expression.MapFrom(c => c.ChapterTests));
+
         CreateMap<ChapterTest, ChapterTestWithQuestionsDto>()
             .ForMember(lt => lt.Questions,
                 expression => expression.MapFrom(lt => lt.ChapterTestQuestions));

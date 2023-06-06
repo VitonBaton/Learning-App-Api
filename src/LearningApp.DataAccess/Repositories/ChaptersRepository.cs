@@ -12,7 +12,9 @@ public sealed class ChaptersRepository : RepositoryBase<Chapter>, IChaptersRepos
     public async Task<IEnumerable<Chapter>> GetAllChaptersAsync()
     {
         var result = await FindAll()
-            .Include(ch => ch.Lectures)
+            .AsSplitQuery()
+            .Include(ch => ch.Lectures)!
+            .ThenInclude(l => l.Tests)
             .OrderBy(ch => ch.Order)
             .ToListAsync();
         return result;

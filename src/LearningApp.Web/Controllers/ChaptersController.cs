@@ -29,7 +29,7 @@ public class ChaptersController : ControllerBase
 
     [HttpGet]
     [AuthorizeRoles(RoleType.Admin, RoleType.Student)]
-    public async Task<ActionResult<IEnumerable<ChapterDto>>> GetAllChapters()
+    public async Task<ActionResult<IEnumerable<ChapterWithLecturesAndTestsDto>>> GetAllChapters()
     {
         var result = await _chaptersService.GetAllChaptersAsync();
         return Ok(result);

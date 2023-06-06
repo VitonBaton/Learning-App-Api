@@ -35,7 +35,7 @@ public class ChaptersService : IChaptersService
         _authenticatedUser = authenticatedUser;
     }
 
-    public async Task<IEnumerable<ChapterDto>> GetAllChaptersAsync()
+    public async Task<IEnumerable<ChapterWithLecturesAndTestsDto>> GetAllChaptersAsync()
     {
         var chapters = await _chaptersRepository.GetAllChaptersAsync();
         _logger.LogInfo("Returned all chapters from database.");
@@ -45,7 +45,7 @@ public class ChaptersService : IChaptersService
             chapter.Lectures = chapter.Lectures.OrderBy(l => l.Order);
         }
 
-        return _mapper.Map<IEnumerable<ChapterDto>>(chapters);
+        return _mapper.Map<IEnumerable<ChapterWithLecturesAndTestsDto>>(chapters);
     }
 
     public async Task<ChapterWithTestsDto?> GetChapterWithTests(int id)

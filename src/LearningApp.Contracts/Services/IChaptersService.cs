@@ -4,7 +4,7 @@ namespace LearningApp.Contracts.Services;
 
 public interface IChaptersService
 {
-    Task<IEnumerable<ChapterDto>> GetAllChaptersAsync();
+    Task<IEnumerable<ChapterWithLecturesAndTestsDto>> GetAllChaptersAsync();
 
     Task<ChapterWithTestsDto?> GetChapterWithTests(int id);
 

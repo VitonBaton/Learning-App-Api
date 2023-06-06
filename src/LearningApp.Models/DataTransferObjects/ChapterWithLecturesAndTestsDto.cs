@@ -7,6 +7,6 @@ public sealed class ChapterWithLecturesAndTestsDto
     public string Description { get; set; }
     public int Order { get; set; }
     public DateTime CreatedAt { get; set; }
-    public IEnumerable<LectureDto> Lectures { get; set; }
-    public IEnumerable<TestDto> Tests { get; set; }
+    public IEnumerable<LectureWithTestsDto> Lectures { get; set; }
+    public IEnumerable<SimpleTestDto> Tests { get; set; }
 }
