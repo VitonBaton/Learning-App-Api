@@ -31,4 +31,16 @@
       <ProjectReference Include="..\LearningApp.Services\LearningApp.Services.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="Documents\lecture1.docx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Documents\lecture2.docx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Documents\lecture3.docx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
