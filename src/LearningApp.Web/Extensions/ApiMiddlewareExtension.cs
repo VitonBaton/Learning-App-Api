@@ -1,4 +1,5 @@
 ﻿using LearningApp.Web.Middlewares;
+using Microsoft.Extensions.FileProviders;
 
 namespace LearningApp.Web.Extensions;
 
@@ -20,6 +21,12 @@ public static class ApiMiddlewareExtension
         app.MapControllers();
 
         app.UseStaticFiles();
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Documents")),
+            RequestPath = new PathString("/Documents")
+        });
+
         return app;
     }
 }
