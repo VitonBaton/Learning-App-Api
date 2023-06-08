@@ -20,6 +20,7 @@ public sealed class ChapterTestsRepository : RepositoryBase<ChapterTest>, IChapt
     {
         return _entities
             .Include(x => x.ChapterTestQuestions)
+            .ThenInclude(x => x.ChapterTestAnswers)
             .Include(x => x.ChapterTestResults)
             .FirstOrDefaultAsync(x => x.Id == testId);
     }

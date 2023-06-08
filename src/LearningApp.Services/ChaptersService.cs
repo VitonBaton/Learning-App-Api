@@ -145,6 +145,14 @@ public class ChaptersService : IChaptersService
             throw new NotFoundAppException("Test not found");
         }
 
+        foreach (var question in result.ChapterTestQuestions)
+        {
+            if (question.ChapterTestAnswers.Count() == 1)
+            {
+                question.ChapterTestAnswers = new List<ChapterTestAnswer>();
+            }
+        }
+
         return _mapper.Map<TestDto>(result);
     }
 
