@@ -15,6 +15,7 @@ public sealed class ChaptersRepository : RepositoryBase<Chapter>, IChaptersRepos
             .AsSplitQuery()
             .Include(ch => ch.Lectures)!
             .ThenInclude(l => l.Tests)
+            .Include(ch => ch.ChapterTests)
             .OrderBy(ch => ch.Order)
             .ToListAsync();
         return result;
