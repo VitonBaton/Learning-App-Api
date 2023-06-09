@@ -42,7 +42,9 @@ public class ChaptersMappingProfile : Profile
             .ForMember(x => x.FirstName,
                 expression => expression.MapFrom(x => x.User.FirstName))
             .ForMember(x => x.LastName,
-                expression => expression.MapFrom(x => x.User.LastName));
+                expression => expression.MapFrom(x => x.User.LastName))
+            .ForMember(x => x.Avatar,
+                expression => expression.MapFrom(x => x.User.Image));
 
         CreateMap<ChapterCreateDto, Chapter>();
 

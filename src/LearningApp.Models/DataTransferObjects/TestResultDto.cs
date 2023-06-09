@@ -8,6 +8,8 @@ public sealed class TestResultDto
 
     public string LastName { get; set; }
 
+    public string? Avatar { get; set; }
+
     public int Attempt { get; set; }
 
     public int RightAnswers { get; set; }
