@@ -15,6 +15,7 @@ public sealed class LectureTestsRepository : RepositoryBase<LectureTest>, ILectu
             .Include(x => x.LectureTestQuestions)
             .ThenInclude(x => x.LectureTestAnswers)
             .Include(x => x.LectureTestResults)
+            .ThenInclude(x => x.User)
             .FirstOrDefaultAsync(x => x.Id == testId);
     }
 }

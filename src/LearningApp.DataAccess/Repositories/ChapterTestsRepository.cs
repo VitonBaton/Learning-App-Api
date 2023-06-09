@@ -22,6 +22,7 @@ public sealed class ChapterTestsRepository : RepositoryBase<ChapterTest>, IChapt
             .Include(x => x.ChapterTestQuestions)
             .ThenInclude(x => x.ChapterTestAnswers)
             .Include(x => x.ChapterTestResults)
+            .ThenInclude(x => x.User)
             .FirstOrDefaultAsync(x => x.Id == testId);
     }
 }

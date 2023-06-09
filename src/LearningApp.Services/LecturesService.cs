@@ -160,6 +160,11 @@ public class LecturesService : ILecturesService
             }
         }
 
+        if (_authenticatedUser.Role == RoleType.Student)
+        {
+            result.LectureTestResults = result.LectureTestResults.Where(x => x.UserId == _authenticatedUser.UserId);
+        }
+
         return _mapper.Map<TestDto>(result);
     }
 

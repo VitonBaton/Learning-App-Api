@@ -153,6 +153,11 @@ public class ChaptersService : IChaptersService
             }
         }
 
+        if (_authenticatedUser.Role == RoleType.Student)
+        {
+            result.ChapterTestResults = result.ChapterTestResults.Where(x => x.UserId == _authenticatedUser.UserId);
+        }
+
         return _mapper.Map<TestDto>(result);
     }
 
