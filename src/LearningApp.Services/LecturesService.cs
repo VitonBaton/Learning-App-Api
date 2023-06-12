@@ -213,6 +213,6 @@ public class LecturesService : ILecturesService
     {
         var rightAnswers = answers.Where(x => x.IsRight).ToList();
         return rightAnswers.Count == passedAnswers.Count() &&
-            answers.All(answer => passedAnswers.Any(x => x == answer.Answer));
+            rightAnswers.All(answer => passedAnswers.Any(x => x == answer.Answer));
     }
 }
