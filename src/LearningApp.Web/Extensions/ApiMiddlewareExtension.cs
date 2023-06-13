@@ -18,6 +18,7 @@ public static class ApiMiddlewareExtension
 
         app.UseCors("CorsPolicy");
 
+        app.UseMiddleware<RequestLoggingMiddleware>();
         app.MapControllers();
 
         app.UseStaticFiles();

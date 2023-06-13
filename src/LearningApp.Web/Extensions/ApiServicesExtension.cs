@@ -56,7 +56,8 @@ public static class ApiServicesExtension
                             .AllowAnyMethod());
             })
             .AddSwaggerServices()
-            .AddSingleton<ErrorHandlerMiddleware>()
+            .AddScoped<ErrorHandlerMiddleware>()
+            .AddScoped<RequestLoggingMiddleware>()
             .AddHttpContexts();
         //.AddFailureHandlers();
     }
